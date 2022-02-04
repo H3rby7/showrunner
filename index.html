@@ -43,86 +43,13 @@
       .audio-group button.playing.reset::before {
         content: '\21BA';
       }
+      #my-test {
+        margin-top: 5rem;
+      }
     </style>
     <script src="js/generic.js"></script>
   </head>
   <body>
-    <script type="text/javascript">
-      function bindLoop(selector) {
-        console.log("Binding Loop '" + selector + "'");
-
-        // DOM elements
-        let outerContainer = document.getElementById(selector);
-        let loopContainer = outerContainer.getElementsByClassName("loop")[0];
-        let loopBtn = loopContainer.querySelector("button");
-        let loopAudio = loopContainer.querySelector("audio");
-
-        let endContainer = outerContainer.getElementsByClassName("post-loop")[0];
-        let endBtn = endContainer.querySelector("button");
-        let endAudio = endContainer.querySelector("audio");
-
-        // STATE
-        let isRunning = false;
-
-        // STATE TRANSITIONS by Events
-        loopAudio.addEventListener("ended", () => {
-          isRunning = false;
-          loopBtn.classList.remove("playing");
-        });
-        loopAudio.addEventListener("pause", () => {
-          isRunning = false;
-          loopBtn.classList.remove("playing");
-        });
-        loopAudio.addEventListener("play", () => {
-          isRunning = true;
-          loopBtn.classList.add("playing");
-        });
-
-        endAudio.addEventListener("ended", () => {
-          loopAudio.loop = true;
-          endBtn.classList.remove("playing");
-        });
-        endAudio.addEventListener("pause", () => {
-          endBtn.classList.remove("playing");
-        });
-        endAudio.addEventListener("play", () => {
-          endBtn.classList.add("playing");
-        });
-
-        // ACTIONS
-        loopBtn.addEventListener("click", () => {
-          if (!isRunning) {
-            return play();
-          } else {
-            return stop();
-          }
-        }, {});
-
-        endBtn.addEventListener("click", () => {
-          loopAudio.loop = false;
-          endAudio.currentTime = 0;
-          const startIn = 1000 * (loopAudio.duration - loopAudio.currentTime) - 150;
-          const tO = setTimeout(() => {
-            endAudio.currentTime = 0;
-            endAudio.play();
-            loopAudio.pause();
-            clearTimeout(tO);
-          }, startIn)
-        });
-
-        function play() {
-          console.log("Playing '" + selector + "'");
-          loopAudio.play();
-        }
-
-        function stop() {
-          console.log("Stopping '" + selector + "'");
-          loopAudio.pause();
-          loopAudio.currentTime = 0;
-        }
-
-      }
-    </script>
     <!-- ******************* PRE/POST SHOW START -->
     <div id="pre-post-show">
       <div id="pre-show-jazz" class="audio-group">
@@ -131,7 +58,7 @@
           <source src="preshow jazz.mp3" type="audio/mp3">
         Your browser does not support the audio element.
         </audio>
-        <script type="text/javascript">new AudioMeta("pre-show-jazz", {isSfx: false}).init();</script>
+        <script type="text/javascript">new StoppableAudio("pre-show-jazz");</script>
       </div>
     </div>
     <!-- ******************* PRE/POST SHOW END -->
@@ -145,7 +72,7 @@
             <source src="Doorbell.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("doorbell", {isSfx: true}).init();</script>
+          <script type="text/javascript">new SoundEffect("doorbell");</script>
         </div>
         <div id="notification" class="audio-group">
           <button>Notification</button>
@@ -153,7 +80,7 @@
             <source src="notification.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("notification", {isSfx: true}).init();</script>
+          <script type="text/javascript">new SoundEffect("notification");</script>
         </div>
         <div id="skype_ringing" class="audio-group">
           <button>Skype Anruf</button>
@@ -161,7 +88,7 @@
             <source src="Skype -  Ringtone.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("skype_ringing", {isSfx: false}).init();</script>
+          <script type="text/javascript">new StoppableAudio("skype_ringing");</script>
         </div>
         <div id="skype_auflegen" class="audio-group">
           <button>Skype Auflegen</button>
@@ -169,7 +96,7 @@
             <source src="Skype - End Call.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("skype_auflegen", {isSfx: true}).init();</script>
+          <script type="text/javascript">new SoundEffect("skype_auflegen");</script>
         </div>
       </div>
       <!-- ******************* SOUND EFFECTS END -->
@@ -182,7 +109,7 @@
             <source src="zaz - je veux.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("zaz", {isSfx: false}).init();</script>
+          <script type="text/javascript">new StoppableAudio("zaz");</script>
         </div>
         <div id="all_of_me" class="audio-group">
           <button>Manhattan LB - All Of Me</button>
@@ -190,7 +117,7 @@
             <source src="manhattan lounge band - all of me.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("all_of_me", {isSfx: false}).init();</script>
+          <script type="text/javascript">new StoppableAudio("all_of_me");</script>
         </div>
         <div id="maske01" class="audio-group">
           <button>Maske 01</button>
@@ -198,7 +125,7 @@
             <source src="Maske 01 - I'll See You In My Dreams.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("maske01", {isSfx: false}).init();</script>
+          <script type="text/javascript">new StoppableAudio("maske01");</script>
         </div>
         <div id="autumn_atmo" class="audio-group">
           <button>Herbst Atmo</button>
@@ -206,7 +133,7 @@
             <source src="autumn atmo.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("autumn_atmo", {isSfx: false}).init();</script>
+          <script type="text/javascript">new StoppableAudio("autumn_atmo");</script>
         </div>
         <div id="ausgehfein" class="audio-group">
           <button>Ausgeh-Fein</button>
@@ -214,28 +141,31 @@
             <source src="Soft positive guitar then piano - Demi-Lune.mp3" type="audio/mp3">
           Your browser does not support the audio element.
           </audio>
-          <script type="text/javascript">new AudioMeta("ausgehfein", {isSfx: false}).init();</script>
-        </div>
-        <div id="my-test">
-          <div class="audio-group loop">
-            <button>Loop</button>
-            <audio controls preload="auto" loop>
-              <source src="loop.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-            </audio>
-          </div>
-          <div class="audio-group post-loop">
-            <button>Post-Loop</button>
-            <audio controls preload="auto">
-              <source src="post-loop.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-            </audio>
-          </div>
-          <script type="text/javascript">bindLoop("my-test");</script>
+          <script type="text/javascript">new StoppableAudio("ausgehfein");</script>
         </div>
       </div>
       <!-- ******************* MUSIC END -->
     </div>
     <!-- ******************* SHOW END -->
+    <div id="my-test">
+      <div class="audio-group" id="my-test-loop">
+        <button>Loop</button>
+        <audio controls preload="auto" loop>
+          <source src="loop.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="audio-group" id="my-test-end">
+        <button>Exit-Loop</button>
+        <audio controls preload="auto">
+          <source src="post-loop.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div>
+        <button>Stop</button>
+      </div>
+      <script type="text/javascript">new QuitableLoop("my-test-loop", "my-test-end");</script>
+    </div>
   </body>
 </html>
