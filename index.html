@@ -103,6 +103,70 @@
 
       }
     </script>
+    <script type="text/javascript">
+      function bindLoop(selector) {
+        console.log("Binding Loop '" + selector + "'");
+
+        // DOM elements
+        let outerContainer = document.getElementById(selector);
+        let loopContainer = outerContainer.getElementsByClassName("loop")[0];
+        let loopBtn = loopContainer.querySelector("button");
+        let loopAudio = loopContainer.querySelector("audio");
+
+        let endContainer = outerContainer.getElementsByClassName("post-loop")[0];
+        let endBtn = endContainer.querySelector("button");
+        let endAudio = endContainer.querySelector("audio");
+
+        // STATE
+        let isRunning = false;
+        let isEnding = true;
+
+        // STATE TRANSITIONS by Events
+        loopAudio.addEventListener("ended", () => {
+          isRunning = false;
+          loopBtn.classList.remove("playing");
+        });
+        loopAudio.addEventListener("pause", () => {
+          isRunning = false;
+          loopBtn.classList.remove("playing");
+        });
+        loopAudio.addEventListener("play", () => {
+          isRunning = true;
+          loopBtn.classList.add("playing");
+        });
+
+        // ACTIONS
+        loopBtn.addEventListener("click", () => {
+          if (!isRunning) {
+            return play();
+          } else {
+            return stop();
+          }
+        }, {});
+
+        endBtn.addEventListener("click", () => {
+          loopAudio.loop = false;
+          endAudio.currentTime = 0;
+          loopAudio.addEventListener("ended", () => {
+            endAudio.currentTime = 0;
+            endAudio.play();
+            loopAudio.loop = true;
+          }, {once: true})
+        });
+
+        function play() {
+          console.log("Playing '" + selector + "'");
+          loopAudio.play();
+        }
+
+        function stop() {
+          console.log("Stopping '" + selector + "'");
+          loopAudio.pause();
+          loopAudio.currentTime = 0;
+        }
+
+      }
+    </script>
     <!-- ******************* PRE/POST SHOW START -->
     <div id="pre-post-show">
       <div id="pre-show-jazz" class="audio-group">
@@ -195,6 +259,23 @@
           Your browser does not support the audio element.
           </audio>
           <script type="text/javascript">bindEffect("ausgehfein", true);</script>
+        </div>
+        <div id="my-test">
+          <div class="audio-group loop">
+            <button>Loop</button>
+            <audio controls preload="auto" loop>
+              <source src="loop.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="audio-group post-loop">
+            <button>Post-Loop</button>
+            <audio controls preload="auto">
+              <source src="post-loop.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <script type="text/javascript">bindLoop("my-test");</script>
         </div>
       </div>
       <!-- ******************* MUSIC END -->
