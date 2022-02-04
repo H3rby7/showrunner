@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+  <head>
+    <meta charset="utf-8">
+    <title>ÜdV</title>
+    <style>
+      body {
+        margin: 0;
+        width: 100%;
+        position: relative;
+      }
+      #pre-post-show {
+        padding: 2rem;
+      }
+      #show {
+        display: flex;
+        width: inherit;
+      }
+      #show-music, #show-sfx {
+        width: 50%;
+        padding: 2rem;
+      }
+      .audio-group {
+        position: relative;
+        margin-bottom: 1rem;
+        display: flex;
+      }
+      .audio-group audio {
+        flex-grow: 1;
+      }
+      .audio-group button {
+        width: 30%;
+      }
+      .audio-group button::before {
+        content: '\25BA';
+      }
+      .audio-group button.playing {
+        background-color: orange;
+      }
+      .audio-group button.playing::before {
+        content: '\25A0';
+      }
+      .audio-group button.playing.reset::before {
+        content: '\21BA';
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function bindEffect(selector, stoppable) {
+        console.log("Binding '" + selector + "'");
+
+        // DOM elements
+        let container = document.getElementById(selector);
+        let btn = container.querySelector("button");
+        let audio = container.querySelector("audio");
+
+        // add CLASSES by options
+        if (!stoppable) {
+          btn.classList.add("reset");
+        }
+
+        // STATE
+        let isRunning = false;
+
+        // STATE TRANSITIONS by Events
+        audio.addEventListener("ended", () => {
+          isRunning = false;
+          btn.classList.remove("playing");
+        });
+        audio.addEventListener("pause", () => {
+          isRunning = false;
+          btn.classList.remove("playing");
+        });
+        audio.addEventListener("play", () => {
+          isRunning = true;
+          btn.classList.add("playing");
+        });
+
+        // ACTIONS
+        btn.addEventListener("click", () => {
+          if (!stoppable) {
+            audio.currentTime = 0;
+            return play();
+          }
+          if (!isRunning) {
+            return play();
+          } else {
+            return stop();
+          }
+        });
+
+        function play() {
+          console.log("Playing '" + selector + "'");
+          audio.play();
+        }
+
+        function stop() {
+          console.log("Stopping '" + selector + "'");
+          audio.pause();
+          audio.currentTime = 0;
+        }
+
+      }
+    </script>
+    <!-- ******************* PRE/POST SHOW START -->
+    <div id="pre-post-show">
+      <div id="pre-show-jazz" class="audio-group">
+        <button>Pre-/Post-Show</button>
+        <audio controls preload="auto" loop>
+          <source src="preshow jazz.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+        </audio>
+        <script type="text/javascript">bindEffect("pre-show-jazz", true);</script>
+      </div>
+    </div>
+    <!-- ******************* PRE/POST SHOW END -->
+    <!-- ******************* SHOW START -->
+    <div id="show">
+      <!-- ******************* SOUND EFFECTS START -->
+      <div id="show-sfx">
+        <div id="doorbell" class="audio-group">
+          <button>Türklingel</button>
+          <audio controls preload="auto">
+            <source src="Doorbell.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("doorbell", false);</script>
+        </div>
+        <div id="notification" class="audio-group">
+          <button>Notification</button>
+          <audio controls preload="auto">
+            <source src="notification.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("notification", false);</script>
+        </div>
+        <div id="skype_ringing" class="audio-group">
+          <button>Skype Anruf</button>
+          <audio controls preload="auto" loop>
+            <source src="Skype -  Ringtone.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("skype_ringing", true);</script>
+        </div>
+        <div id="skype_auflegen" class="audio-group">
+          <button>Skype Auflegen</button>
+          <audio controls preload="auto">
+            <source src="Skype - End Call.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("skype_auflegen", false);</script>
+        </div>
+      </div>
+      <!-- ******************* SOUND EFFECTS END -->
+  
+      <!-- ******************* MUSIC START -->
+      <div id="show-music">
+        <div id="zaz" class="audio-group">
+          <button>Zaz - Je Veux</button>
+          <audio controls preload="auto">
+            <source src="zaz - je veux.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("zaz", true);</script>
+        </div>
+        <div id="all_of_me" class="audio-group">
+          <button>Manhattan LB - All Of Me</button>
+          <audio controls preload="auto">
+            <source src="manhattan lounge band - all of me.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("all_of_me", true);</script>
+        </div>
+        <div id="maske01" class="audio-group">
+          <button>Maske 01</button>
+          <audio controls preload="auto">
+            <source src="Maske 01 - I'll See You In My Dreams.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("maske01", true);</script>
+        </div>
+        <div id="autumn_atmo" class="audio-group">
+          <button>Herbst Atmo</button>
+          <audio controls preload="auto" loop>
+            <source src="autumn atmo.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("autumn_atmo", true);</script>
+        </div>
+        <div id="ausgehfein" class="audio-group">
+          <button>Ausgeh-Fein</button>
+          <audio controls preload="auto">
+            <source src="Soft positive guitar then piano - Demi-Lune.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+          </audio>
+          <script type="text/javascript">bindEffect("ausgehfein", true);</script>
+        </div>
+      </div>
+      <!-- ******************* MUSIC END -->
+    </div>
+    <!-- ******************* SHOW END -->
+  </body>
+</html>
