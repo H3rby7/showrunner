@@ -52,6 +52,43 @@
   <body>
     <!-- ******************* PRE/POST SHOW START -->
     <div id="pre-post-show">
+      <div id="test-multiple-audio" class="audio-group">
+        <button>Start/Stop/Change</button>
+        <audio controls preload="auto">
+          <source src="loop.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+        </audio>
+        <script type="text/javascript">
+          let state = -1;
+          const btn = document.getElementById("test-multiple-audio").querySelector("button");
+          const audio = document.getElementById("test-multiple-audio").querySelector("audio");
+          btn.addEventListener("click", () => {
+            loopSwitch(state+1);
+          });
+          audio.addEventListener("ended", () => {
+            if (state === 0) {
+              loopSwitch(1);
+            } else if (state === 1) {
+              loopSwitch(2);
+            }
+          });
+          function loopSwitch(nextState) {
+            state = nextState % 3;
+            console.log("State " + state);
+            if (state === 0) {
+              audio.setAttribute("src", "loop.mp3");
+              audio.play();
+            } else if (state === 1) {
+              // audio.setAttribute("src", "post-loop.mp3");
+              // audio.play();
+              audio.currentTime = 5;
+            } else {
+              audio.pause();
+              audio.currentTime = 0;
+            }
+          }
+        </script>
+      </div>
       <div id="pre-show-jazz" class="audio-group">
         <button>Pre-/Post-Show</button>
         <audio controls preload="auto" loop>
