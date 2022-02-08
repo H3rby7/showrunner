@@ -53,40 +53,63 @@
     <!-- ******************* PRE/POST SHOW START -->
     <div id="pre-post-show">
       <div id="test-multiple-audio" class="audio-group">
+        <input type="number" id="loopStart">
+        <input type="number" id="loopEnd">
         <button>Start/Stop/Change</button>
         <audio controls preload="auto">
-          <source src="loop.mp3" type="audio/mp3">
+          <source src="manhattan lounge band - all of me.mp3" type="audio/mp3">
         Your browser does not support the audio element.
         </audio>
         <script type="text/javascript">
-          let state = -1;
+          let loop = false;
+          let tO;
+          let loopStart = 74566;
+          let loopEnd = 78217;
           const btn = document.getElementById("test-multiple-audio").querySelector("button");
           const audio = document.getElementById("test-multiple-audio").querySelector("audio");
           btn.addEventListener("click", () => {
-            loopSwitch(state+1);
-          });
-          audio.addEventListener("ended", () => {
-            if (state === 0) {
-              loopSwitch(1);
-            } else if (state === 1) {
-              loopSwitch(2);
+            // Activate Loop
+            if (!loop) {
+              loop = true;
+              console.log("Loop active");
+              return;
+            }
+            // Exit Loop
+            if (loop) {
+              loop = false;
+              console.log("Loop inactive");
+              if (tO) {
+                clearTimeout(tO);
+                tO = undefined;
+              }
+              return;
             }
           });
-          function loopSwitch(nextState) {
-            state = nextState % 3;
-            console.log("State " + state);
-            if (state === 0) {
-              audio.setAttribute("src", "loop.mp3");
-              audio.play();
-            } else if (state === 1) {
-              // audio.setAttribute("src", "post-loop.mp3");
-              // audio.play();
-              audio.currentTime = 5;
-            } else {
-              audio.pause();
-              audio.currentTime = 0;
+          audio.addEventListener("timeupdate", ({srcElement: {currentTime}}) => {
+            if (!loop || tO) {
+              return;
             }
-          }
+            const loopEndsIn = loopEnd - audio.currentTime * 1000;
+            if (loopEndsIn > 1000) {
+              return;
+            }
+            console.log("Time is " + audio.currentTime + "s, exiting in " + loopEndsIn + " ms");
+            tO = setTimeout(() => {
+              audio.currentTime = loopStart / 1000;
+              clearTimeout(tO);
+              tO = undefined;
+            }, loopEndsIn);
+          });
+          const loopStartInput = document.getElementById("loopStart");
+          loopStartInput.value = loopStart;
+          loopStartInput.addEventListener("change", (ev) => {
+            loopStart = ev.target.value;
+          });
+          const loopEndInput = document.getElementById("loopEnd");
+          loopEndInput.value = loopEnd;
+          loopEndInput.addEventListener("change", (ev) => {
+            loopEnd = ev.target.value;
+          });
         </script>
       </div>
       <div id="pre-show-jazz" class="audio-group">
