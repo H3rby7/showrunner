@@ -50,6 +50,11 @@
     <script src="js/generic.js"></script>
   </head>
   <body>
+    <!-- Somehow the autoplay, muted, loop helps the browser Audio to stay 'active', so freshly run sounds are hearable from the start on -->
+    <audio preload="auto" loop muted autoplay>
+      <source src="notification.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+    </audio>
     <!-- ******************* PRE/POST SHOW START -->
     <div id="pre-post-show">
       <div id="test-multiple-audio" class="audio-group">
