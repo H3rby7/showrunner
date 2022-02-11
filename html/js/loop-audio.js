@@ -82,9 +82,18 @@ function createAudioLoopNode(root) {
 function gradientForLoop(loopStart, loopEnd, duration, active) {
   const regularBackground = "var(--audio-timeline-bg-color)";
   const loopBackground = active ? "var(--audio-timeline-bg-loop-color)" : "var(--audio-timeline-bg-loop-inactive-color)";
-  const startPercent = Math.floor(loopStart * 100 /  duration);
-  const endPercent = Math.floor(loopEnd * 100 /  duration);
-  return `linear-gradient(90deg, ${regularBackground} 0%, ${regularBackground} ${startPercent}%, ${loopBackground} ${startPercent}%, ${loopBackground} ${endPercent}%, ${regularBackground} ${endPercent}%, ${regularBackground} 100%)`;
+  const start = calcPrioLower(loopStart);
+  const end = calcPrioLower(loopEnd);
+  return `linear-gradient(90deg, ${regularBackground} 0%, ${regularBackground} ${start}%, ${loopBackground} ${start}%, ${loopBackground} ${end}%, ${regularBackground} ${end}%, ${regularBackground} 100%)`;
+
+  function calcPrioLower(timing) {
+    const perc = timing * 100 /  duration;
+    const percRounded = Math.round(perc);
+    if (Math.abs(perc - percRounded) < 0.25) {
+      return percRounded;
+    }
+    return perc > percRounded ? percRounded : perc;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
