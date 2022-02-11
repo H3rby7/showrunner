@@ -15,16 +15,19 @@ function createSoundEffectNode(root) {
   root.innerHTML = "";
 
   const audio = DOMcreateAudio(src, type, loop);
+  const controls = DOMcreateAudioControls();
+  const timeline = controls.querySelector(".audio-timeline");
 
   root.appendChild(btn);
   root.appendChild(audio);
-  audioControls(audio);
+  root.appendChild(controls);
 
-  linkControls(root, btn, audio);
+  linkControls();
+
   if (resetting) {
-    makeResetable(btn, audio);
+    makeResetable();
   } else {
-    makeStoppable(btn, audio);
+    makeStoppable();
   }
 
   return root;
@@ -40,9 +43,9 @@ function createSoundEffectNode(root) {
   function makeStoppable() {
     btn.addEventListener("click", () => {
       if (playing) {
+        audio.currentTime = 0;
         audio.pause();
       } else {
-        audio.currentTime = 0;
         audio.play();
       }
     });
@@ -62,6 +65,18 @@ function createSoundEffectNode(root) {
       playing = true;
       btn.classList.add("playing");
     });
+    // Setup Timeline using audio duration
+    audio.addEventListener("loadedmetadata", () => {
+      timeline.max = audio.duration;
+      timeline.step = audio.duration / 1000;
+    }, {once: true});
+    // Link Audio and Timeline
+    timeline.addEventListener("change", ({target: {value}}) => {
+      audio.currentTime = value;
+    });
+    audio.addEventListener("timeupdate", ({target: {currentTime}}) => {
+      timeline.value = currentTime;
+    });
   }
 }
 
@@ -73,40 +88,26 @@ function DOMcreateAudio(src, type, loop) {
   audio.src = src;
   audio.type = type;
   audio.preload = "auto";
-  audio.controls = true;
   if (loop) audio.loop = true;
   return audio;
+}
+
+function DOMcreateAudioControls() {
+  const div = document.createElement("div");
+  div.classList.add("audio-controls");
+
+  const timeline = document.createElement("input");
+  timeline.id = "audioTimeline-" + makeid(5);
+  timeline.classList.add("audio-timeline");
+  timeline.autocomplete = false;
+  timeline.type = "range";
+  timeline.value = 0;
+  div.appendChild(timeline);
+
+  return div;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("sound-effect")
     .forEach(createSoundEffectNode);
 }, {once: true});
-
-function audioControls(audio) {
-  const div = document.createElement("div");
-  div.classList.add("audio-controls");
-
-  const timeline = document.createElement("input");
-  timeline.id = "audioTimeline-" + makeid(1);
-  timeline.classList.add("audio-timeline");
-  timeline.autocomplete = false;
-  timeline.type = "range";
-  timeline.value = 0;
-  timeline.step = 0.1;
-  audio.addEventListener("loadedmetadata", () => {
-    timeline.max = audio.duration;
-  }, {once: true});
-
-  div.appendChild(timeline);
-
-  audio.parentNode.appendChild(div);
-
-  audio.controls = undefined;
-  timeline.addEventListener("change", ({target: {value}}) => {
-    audio.currentTime = value;
-  });
-  audio.addEventListener("timeupdate", ({target: {currentTime}}) => {
-    timeline.value = currentTime;
-  });
-}
