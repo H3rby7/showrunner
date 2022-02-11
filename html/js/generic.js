@@ -18,6 +18,7 @@ function createSoundEffectNode(root) {
 
   root.appendChild(btn);
   root.appendChild(audio);
+  audioControls(audio);
 
   linkControls(root, btn, audio);
   if (resetting) {
@@ -149,3 +150,31 @@ function DOMrenderCustomElements() {
 document.addEventListener("DOMContentLoaded", () => {
   DOMrenderCustomElements();
 });
+
+function audioControls(audio) {
+  const div = document.createElement("div");
+  div.classList.add("audio-timeline");
+
+  const timeline = document.createElement("input");
+  timeline.type = "range";
+  timeline.value = 0;
+  timeline.step = 0.1;
+  audio.addEventListener("loadedmetadata", () => {
+    timeline.max = audio.duration;
+  }, {once: true})
+
+  div.appendChild(timeline);
+  audio.parentNode.appendChild(div);
+
+  audio.controls = undefined;
+  linkControls();
+
+  function linkControls() {
+    timeline.addEventListener("change", ({target: {value}}) => {
+      audio.currentTime = value;
+    });
+    audio.addEventListener("timeupdate", ({target: {currentTime}}) => {
+      timeline.value = currentTime;
+    });
+  }
+}
