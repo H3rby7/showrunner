@@ -6,17 +6,16 @@ function createSoundEffectNode(root) {
   const resetting = root.attributes.reset;
   const loop = root.attributes.loop;
 
-  const div = document.createElement("div");
-  div.classList.add("audio-group");
-
   const btn = document.createElement("button");
   btn.innerHTML = root.innerHTML;
+  btn.classList.add("audio-control");
+  btn.classList.add("play");
   root.innerHTML = "";
 
   const audio = DOMcreateAudio(src, type, loop);
 
-  div.appendChild(btn);
-  div.appendChild(audio);
+  root.appendChild(btn);
+  root.appendChild(audio);
 
   linkControls(root, btn, audio);
   if (resetting) {
@@ -24,8 +23,6 @@ function createSoundEffectNode(root) {
   } else {
     makeStoppable(btn, audio);
   }
-
-  root.appendChild(div);
 
   return root;
 
@@ -72,31 +69,36 @@ function createAudioLoopNode(root) {
   const loopStart = root.attributes.loopStart.value;
   const loopEnd = root.attributes.loopEnd.value;
 
-  const div = root.querySelector("div");
   const audio = root.querySelector("audio");
 
   const loopBtn = document.createElement("button");
-  loopBtn.innerHTML = "ON"
+  loopBtn.classList.add("audio-control");
+  loopBtn.classList.add("loop");
 
   // Trigger Loop ON/OFF
   loopBtn.addEventListener("click", () => {
-    // Activate Loop
     if (!looping) {
-      looping = true;
-      loopBtn.textContent = "ON";
-      return;
-    }
-    // Exit Loop
-    if (looping) {
-      looping = false;
-      loopBtn.textContent = "OFF";
-      if (tO) {
-        clearTimeout(tO);
-        tO = undefined;
-      }
-      return;
+      activateLoop();
+    } else {
+      exitLoop();
     }
   });
+
+  function activateLoop() {
+    looping = true;
+    loopBtn.textContent = "ON";
+    loopBtn.classList.add("looping");
+  }
+
+  function exitLoop() {
+    looping = false;
+    loopBtn.textContent = "OFF";
+    loopBtn.classList.remove("looping");
+    if (tO) {
+      clearTimeout(tO);
+      tO = undefined;
+    }
+  }
 
   // Listen on timeupdate of audio to find looping timing.
   audio.addEventListener("timeupdate", () => {
@@ -116,12 +118,14 @@ function createAudioLoopNode(root) {
     }, loopEndsIn);
   });
 
-  div.insertBefore(loopBtn, div.children[1])
+  activateLoop();
+  root.insertBefore(loopBtn, root.children[1])
   return root;
 }
 
 function DOMcreateAudio(src, type, loop) {
   const audio = document.createElement("audio");
+  audio.classList.add("custom-audio");
   audio.src = src;
   audio.type = type;
   audio.preload = "auto";

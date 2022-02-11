@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  width: 100%;
+  position: relative;
+}
+#pre-post-show {
+  padding: 2rem;
+}
+#show {
+  display: flex;
+  width: inherit;
+}
+#show-music, #show-sfx {
+  width: 50%;
+  padding: 2rem;
+}
+
+sound-effect {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+}
+audio-loop {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+audio.custom-audio {
+  flex-grow: 1;
+}
+button.audio-control.play {
+  width: 30%;
+}
+button.audio-control.play::before {
+  content: '\25BA';
+}
+button.audio-control.play.playing {
+  background-color: orange;
+}
+button.audio-control.play.playing::before {
+  content: '\25A0';
+}
+button.audio-control.play.playing.reset::before {
+  content: '\21BA';
+}
+
+button.audio-control.loop {
+  width: 3rem;
+  background-color: orange;
+}
+button.audio-control.loop.looping {
+  background-color: greenyellow;
+}
+button.audio-control.loop::before {
+  content: '\21BA';
+}

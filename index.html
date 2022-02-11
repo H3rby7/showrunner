@@ -3,51 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>ÜdV</title>
-    <style>
-      body {
-        margin: 0;
-        width: 100%;
-        position: relative;
-      }
-      #pre-post-show {
-        padding: 2rem;
-      }
-      #show {
-        display: flex;
-        width: inherit;
-      }
-      #show-music, #show-sfx {
-        width: 50%;
-        padding: 2rem;
-      }
-      .audio-group {
-        position: relative;
-        margin-bottom: 1rem;
-        display: flex;
-      }
-      .audio-group audio {
-        flex-grow: 1;
-      }
-      .audio-group button {
-        width: 30%;
-      }
-      .audio-group button::before {
-        content: '\25BA';
-      }
-      .audio-group button.playing {
-        background-color: orange;
-      }
-      .audio-group button.playing::before {
-        content: '\25A0';
-      }
-      .audio-group button.playing.reset::before {
-        content: '\21BA';
-      }
-      #my-test {
-        margin-top: 5rem;
-      }
-    </style>
-    <script src="js/generic.js"></script>
+    <script src="html/js/generic.js"></script>
+    <link href="html/css/styles.css" rel="stylesheet">
   </head>
   <body>
     <!-- Somehow the autoplay, muted, loop helps the browser Audio to stay 'active', so freshly run sounds are hearable from the start on -->
