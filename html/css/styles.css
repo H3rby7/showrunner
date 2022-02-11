@@ -1,3 +1,9 @@
+:root {
+  --audio-timeline-bg-color: #3d3846;
+  --audio-timeline-bg-loop-color: rgba(104, 255, 102, 1);
+  --audio-timeline-bg-loop-inactive-color: rgb(127, 127, 127);
+}
+
 body {
   margin: 0;
   width: 100%;
@@ -50,7 +56,7 @@ button.audio-control.loop {
   background-color: orange;
 }
 button.audio-control.loop.looping {
-  background-color: greenyellow;
+  background-color: var(--audio-timeline-bg-loop-color);
 }
 button.audio-control.loop::before {
   content: '\21BA';
