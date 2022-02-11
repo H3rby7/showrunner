@@ -57,83 +57,10 @@
     </audio>
     <!-- ******************* PRE/POST SHOW START -->
     <div id="pre-post-show">
-      <div id="test-multiple-audio" class="audio-group">
-        <input type="number" id="loopStart">
-        <input type="number" id="loopEnd">
-        <button>Click to loop</button>
-        <audio controls preload="auto">
-          <source src="manhattan lounge band - all of me.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-        </audio>
-        <script type="text/javascript">
-          // STATE
-          let loop = false;
-          let tO;
-
-          // defining the loop (initially)
-          let loopStart = 74566;
-          let loopEnd = 78217;
-
-          // DOM
-          const btn = document.getElementById("test-multiple-audio").querySelector("button");
-          const audio = document.getElementById("test-multiple-audio").querySelector("audio");
-          const loopStartInput = document.getElementById("loopStart");
-          const loopEndInput = document.getElementById("loopEnd");
-
-          // Trigger Loop ON/OFF
-          btn.addEventListener("click", () => {
-            // Activate Loop
-            if (!loop) {
-              loop = true;
-              btn.classList.add("playing");
-              btn.textContent = "Loop is active";
-              return;
-            }
-            // Exit Loop
-            if (loop) {
-              loop = false;
-              btn.classList.remove("playing");
-              btn.textContent = "Click to loop";
-              if (tO) {
-                clearTimeout(tO);
-                tO = undefined;
-              }
-              return;
-            }
-          });
-
-          // Listen on timeupdate of audio to find looping timing.
-          audio.addEventListener("timeupdate", ({srcElement: {currentTime}}) => {
-            if (!loop || tO) {
-              // Not looping, or timeout is already set
-              return;
-            }
-            const loopEndsIn = loopEnd - audio.currentTime * 1000;
-            if (loopEndsIn > 1000 || loopEndsIn < 0) {
-              // Too soon to add trigger OR loopEnd has already passed.
-              return;
-            }
-            tO = setTimeout(() => {
-              audio.currentTime = loopStart / 1000;
-              clearTimeout(tO);
-              tO = undefined;
-            }, loopEndsIn);
-          });
-
-          // INPUT controls for loop
-          // Set Initial value to the preset
-          loopStartInput.value = loopStart;
-          loopEndInput.value = loopEnd;
-
-          // Listen for changes in input field and reflect to JS state.
-          loopStartInput.addEventListener("change", (ev) => {
-            loopStart = ev.target.value;
-          });
-          loopEndInput.addEventListener("change", (ev) => {
-            loopEnd = ev.target.value;
-          });
-        </script>
-      </div>
+      <audio-loop src="manhattan lounge band - all of me.mp3"
+        loopStart=74566
+        loopEnd=78217
+        type="audio/mp3">All of Me</audio-loop>
       <sound-effect src="preshow jazz.mp3"
           type="audio/mp3"
           loop>Pre-/Post-Show</sound-effect>

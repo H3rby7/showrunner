@@ -1,13 +1,5 @@
-function DOMrenderSoundEffect() {
-  document.querySelectorAll("sound-effect").forEach(el => {
-    const content = createSoundEffectNode(el);
-    el.innerHTML = "";
-    el.appendChild(content);
-  });
-}
-
 function createSoundEffectNode(root) {
-  root.playing = false;
+  let playing = false;
 
   const src = root.attributes.src.value;
   const type = root.attributes.type.value;
@@ -19,6 +11,7 @@ function createSoundEffectNode(root) {
 
   const btn = document.createElement("button");
   btn.innerHTML = root.innerHTML;
+  root.innerHTML = "";
 
   const audio = DOMcreateAudio(src, type, loop);
 
@@ -32,7 +25,9 @@ function createSoundEffectNode(root) {
     makeStoppable(btn, audio);
   }
 
-  return div;
+  root.appendChild(div);
+
+  return root;
 
   function makeResetable() {
     btn.classList.add("reset");
@@ -44,7 +39,7 @@ function createSoundEffectNode(root) {
   
   function makeStoppable() {
     btn.addEventListener("click", () => {
-      if (root.playing) {
+      if (playing) {
         audio.pause();
       } else {
         audio.currentTime = 0;
@@ -52,34 +47,96 @@ function createSoundEffectNode(root) {
       }
     });
   }
+
+  function linkControls() {
+    // STATE TRANSITIONS by Events
+    audio.addEventListener("ended", () => {
+      playing = false;
+      btn.classList.remove("playing");
+    });
+    audio.addEventListener("pause", () => {
+      playing = false;
+      btn.classList.remove("playing");
+    });
+    audio.addEventListener("play", () => {
+      playing = true;
+      btn.classList.add("playing");
+    });
+  }
+}
+
+function createAudioLoopNode(root) {
+  createSoundEffectNode(root);
+  let looping = true;
+  let tO;
+  const loopStart = root.attributes.loopStart.value;
+  const loopEnd = root.attributes.loopEnd.value;
+
+  const div = root.querySelector("div");
+  const audio = root.querySelector("audio");
+
+  const loopBtn = document.createElement("button");
+  loopBtn.innerHTML = "ON"
+
+  // Trigger Loop ON/OFF
+  loopBtn.addEventListener("click", () => {
+    // Activate Loop
+    if (!looping) {
+      looping = true;
+      loopBtn.textContent = "ON";
+      return;
+    }
+    // Exit Loop
+    if (looping) {
+      looping = false;
+      loopBtn.textContent = "OFF";
+      if (tO) {
+        clearTimeout(tO);
+        tO = undefined;
+      }
+      return;
+    }
+  });
+
+  // Listen on timeupdate of audio to find looping timing.
+  audio.addEventListener("timeupdate", () => {
+    if (!looping || tO) {
+      // Not looping, or timeout is already set
+      return;
+    }
+    const loopEndsIn = loopEnd - audio.currentTime * 1000;
+    if (loopEndsIn > 1000 || loopEndsIn < 0) {
+      // Too soon to add trigger OR loopEnd has already passed.
+      return;
+    }
+    tO = setTimeout(() => {
+      audio.currentTime = loopStart / 1000;
+      clearTimeout(tO);
+      tO = undefined;
+    }, loopEndsIn);
+  });
+
+  div.insertBefore(loopBtn, div.children[1])
+  return root;
 }
 
 function DOMcreateAudio(src, type, loop) {
   const audio = document.createElement("audio");
   audio.src = src;
   audio.type = type;
-  audio.preload = "audo";
+  audio.preload = "auto";
   audio.controls = true;
   if (loop) audio.loop = true;
   return audio;
 }
 
-function linkControls(parent, btn, audio) {
-  // STATE TRANSITIONS by Events
-  audio.addEventListener("ended", () => {
-    parent.playing = false;
-    btn.classList.remove("playing");
-  });
-  audio.addEventListener("pause", () => {
-    parent.playing = false;
-    btn.classList.remove("playing");
-  });
-  audio.addEventListener("play", () => {
-    parent.playing = true;
-    btn.classList.add("playing");
-  });
+function DOMrenderCustomElements() {
+  document.querySelectorAll("sound-effect")
+  .forEach(createSoundEffectNode);
+  document.querySelectorAll("audio-loop")
+  .forEach(createAudioLoopNode);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  DOMrenderSoundEffect();
+  DOMrenderCustomElements();
 });
