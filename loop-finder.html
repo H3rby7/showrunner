@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    .row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      max-width: 800px;
+      height: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .row label {
+      width: 20rem;
+    }
+
+    input {
+      width: 13rem;
+    }
+
+    audio {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Finding your loop</h1>
+    <p>
+    <ol>
+      <li>Chose your track</li>
+      <li>use the value inputs to find the correct looping section</li>
+      <li>profit.</li>
+    </ol>
+    </p>
+  </div>
+  <div class="audio-group">
+    <div class="row">
+      <label for="loopStart"><p>Beginning of Loop (in Milliseconds)</p></label>
+      <input type="number" id="loopStart">
+      <p id="loopStartSeconds"></p>
+    </div>
+    <div class="row">
+      <label for="loopEnd"><p>End of Loop (in Milliseconds)</p></label>
+      <input type="number" id="loopEnd">
+      <p id="loopEndSeconds"></p>
+    </div>
+    <div class="row">
+      <label for="audioFile">Select Audio File</label>
+      <input type="file" id="audioFile" accept="audio/*">
+    </div>
+    <div class="row">
+      <audio id="loopAudio" controls preload="auto">
+        <source src="manhattan lounge band - all of me.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+      </audio>
+    </div>
+    <script type="text/javascript">
+      // STATE
+      let tO;
+
+      // defining the loop (initially)
+      let loopStart = 74566;
+      let loopEnd = 78217;
+
+      // DOM
+      const audioFile = document.getElementById("audioFile");
+      const audio = document.getElementById("loopAudio");
+      const loopStartInput = document.getElementById("loopStart");
+      const loopStartSeconds = document.getElementById("loopStartSeconds");
+      const loopEndInput = document.getElementById("loopEnd");
+      const loopEndSeconds = document.getElementById("loopEndSeconds");
+
+      // Listen on timeupdate of audio to find looping timing.
+      audio.addEventListener("timeupdate", ({srcElement: {currentTime}}) => {
+        if (tO) {
+          // timeout is already set
+          return;
+        }
+        const loopEndsIn = loopEnd - audio.currentTime * 1000;
+        if (loopEndsIn > 1000 || loopEndsIn < 0) {
+          // Too soon to add trigger OR loopEnd has already passed.
+          return;
+        }
+        tO = setTimeout(() => {
+          audio.currentTime = loopStart / 1000;
+          clearTimeout(tO);
+          tO = undefined;
+        }, loopEndsIn);
+      });
+
+      audioFile.addEventListener("change", ({srcElement: {files}}) => {
+        URL.revokeObjectURL(audio.src);
+        audio.src = URL.createObjectURL(files[0]);
+      })
+
+      // INPUT controls for loop
+      // Set Initial value to the preset
+      loopStartInput.value = loopStart;
+      loopStartSeconds.innerHTML = msToHuman(loopStart);
+      loopEndInput.value = loopEnd;
+      loopEndSeconds.innerHTML = msToHuman(loopEnd);
+
+      // Listen for changes in input field and reflect to JS state.
+      loopStartInput.addEventListener("change", (ev) => {
+        loopStart = ev.target.value;
+        loopStartSeconds.innerHTML = msToHuman(ev.target.value);
+      });
+      loopEndInput.addEventListener("change", (ev) => {
+        loopEnd = ev.target.value;
+        loopEndSeconds.innerHTML = msToHuman(ev.target.value);
+      });
+
+      function msToHuman(ms) {
+        return (ms / 1000) + "s";
+      }
+    </script>
+  </div>
+</body>
