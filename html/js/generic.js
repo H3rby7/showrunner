@@ -1,3 +1,5 @@
+// ***************** SOUND/MUSIC *****************
+
 function createSoundEffectNode(root) {
   let playing = false;
 
@@ -62,6 +64,8 @@ function createSoundEffectNode(root) {
   }
 }
 
+// ***************** LOOPING *****************
+
 function createAudioLoopNode(root) {
   createSoundEffectNode(root);
   let looping = true;
@@ -75,7 +79,6 @@ function createAudioLoopNode(root) {
   loopBtn.classList.add("audio-control");
   loopBtn.classList.add("loop");
 
-  // Trigger Loop ON/OFF
   loopBtn.addEventListener("click", () => {
     if (!looping) {
       activateLoop();
@@ -122,6 +125,8 @@ function createAudioLoopNode(root) {
   root.insertBefore(loopBtn, root.children[1])
   return root;
 }
+
+// ***************** GENERICS *****************
 
 function DOMcreateAudio(src, type, loop) {
   const audio = document.createElement("audio");
