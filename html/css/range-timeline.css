@@ -21,7 +21,7 @@ input[type="range"]:focus {
 /******** Chrome, Safari, Opera and Edge Chromium styles ********/
 /* slider track */
 input[type="range"]::-webkit-slider-runnable-track {
-  background-color: #3d3846;
+  background-color: var(--audio-timeline-bg-color);
   background-position: left;
   border-radius: 0;
   height: var(--audio-timeline-height);
@@ -32,7 +32,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: 0px; /* Centers thumb on the track */
-  background-color: #ffffff;
+  background-color: var(--audio-timeline-thumb-color);
   border-radius: 0;
   height: var(--audio-timeline-height);
   width: var(--audio-timeline-thumb-width);
@@ -42,10 +42,23 @@ input[type="range"]:focus::-webkit-slider-thumb {
   outline: none;
 }
 
+/* NOT SURE!!! Might be -> slider 'played parts' for chrome etc. */
+input[type="range"]::before {
+  background-color: var(--audio-timeline-bg-played-color);
+  height: var(--audio-timeline-height);
+}
+
+/*********** MS styles ***************/
+/* slider 'played parts' */
+input[type="range"]::-ms-fill-lower {
+  background-color: var(--audio-timeline-bg-played-color);
+  height: var(--audio-timeline-height);
+}
+
 /*********** Firefox styles ***********/
 /* slider track */
 input[type="range"]::-moz-range-track {
-  background-color: #3d3846;
+  background-color: var(--audio-timeline-bg-color);
   background-position: left;
   border-radius: 0;
   height: var(--audio-timeline-height);
@@ -53,7 +66,7 @@ input[type="range"]::-moz-range-track {
 
 /* slider thumb */
 input[type="range"]::-moz-range-thumb {
-  background-color: #ffffff;
+  background-color: var(--audio-timeline-thumb-color);
   border: none; /*Removes extra border that FF applies*/
   border-radius: 0;
   height: var(--audio-timeline-height);
@@ -62,4 +75,10 @@ input[type="range"]::-moz-range-thumb {
 
 input[type="range"]:focus::-moz-range-thumb{
   outline: none;
+}
+
+/* slider 'played parts' */
+input[type="range"]::-moz-range-progress {
+  background-color: var(--audio-timeline-bg-played-color);
+  height: var(--audio-timeline-height);
 }
