@@ -75,7 +75,7 @@ function createAudioLoopNode(root) {
   }, {once: true});
 
   root.appendChild(style);
-  root.insertBefore(loopBtn, root.children[1])
+  root.insertBefore(loopBtn, root.children[2])
   return root;
 }
 
