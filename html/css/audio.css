@@ -19,6 +19,7 @@ button.audio-control {
   padding: 0;
   position: relative;
   overflow: hidden;
+  display: inline-flex;
 }
 button.audio-control::before {
   position: absolute;
@@ -81,11 +82,11 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
-  background-position: left;
   cursor: pointer;
   width: 50rem;
   height: var(--audio-timeline-height);
   margin: 0;
+  display: inline-flex;
 }
 
 /* Removes default focus */
@@ -97,7 +98,6 @@ input[type="range"]:focus {
 /* slider track */
 input[type="range"]::-webkit-slider-runnable-track {
   background-color: var(--audio-timeline-bg-color);
-  background-position: left;
   border-radius: 0;
   height: var(--audio-timeline-height);
 }
@@ -134,7 +134,6 @@ input[type="range"]::-ms-fill-lower {
 /* slider track */
 input[type="range"]::-moz-range-track {
   background-color: var(--audio-timeline-bg-color);
-  background-position: left;
   border-radius: 0;
   height: var(--audio-timeline-height);
 }

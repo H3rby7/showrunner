@@ -11,15 +11,40 @@
 </head>
 
 <div class="cpt-section">
-  <button class="audio-control loop"></button>
-  <button class="audio-control loop looping"></button>
+  <div>
+    <button class="audio-control play"></button>
+  </div>
+  <div>
+    <button class="audio-control play playing"></button>
+  </div>
 </div>
 <div class="cpt-section">
-  <button class="audio-control play"></button>
-  <button class="audio-control play playing"></button>
+  <div>
+    <button class="audio-control play"></button>
+    <input class="audio-timeline" autocomplete="false" type="range" min="0" max="100" step="0.5" value="30">
+  </div>
+  <div>
+    <button class="audio-control play playing"></button>
+    <input class="audio-timeline" autocomplete="false" type="range" min="0" max="100" step="0.5" value="30">
+  </div>
 </div>
 <div class="cpt-section">
-  <button class="audio-control play"></button>
-  <button class="audio-control loop"></button>
-  <input class="audio-timeline" autocomplete="false" type="range" min="0" max="100" step="0.5" value="30">
+  <div>
+    <button class="audio-control play"></button>
+    <button class="audio-control loop"></button>
+    <input id="loopTimeline" class="audio-timeline" autocomplete="false" type="range" min="0" max="100" step="0.5" value="30">
+  </div>
+  <div>
+    <button class="audio-control play"></button>
+    <button class="audio-control loop looping"></button>
+   <input id="loopTimelineActive" class="audio-timeline" autocomplete="false" type="range" min="0" max="100" step="0.5" value="30">
+  </div>
+  <style>
+    #loopTimeline::-webkit-slider-runnable-track, #loopTimeline::-moz-range-track {
+      background: linear-gradient(90deg, var(--audio-timeline-bg-color) 0%, var(--audio-timeline-bg-color) 10%, var(--color-primary) 10%, var(--color-primary) 37%, var(--audio-timeline-bg-color) 37%, var(--audio-timeline-bg-color) 100%);
+    }
+    #loopTimelineActive::-webkit-slider-runnable-track, #loopTimelineActive::-moz-range-track {
+      background: linear-gradient(90deg, var(--audio-timeline-bg-color) 0%, var(--audio-timeline-bg-color) 10%, var(--color-primary-active) 10%, var(--color-primary-active) 37%, var(--audio-timeline-bg-color) 37%, var(--audio-timeline-bg-color) 100%);
+    }
+  </style>
 </div>
