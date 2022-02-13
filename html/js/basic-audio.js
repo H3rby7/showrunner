@@ -5,14 +5,9 @@ function createSoundEffectNode(root, withTimeline) {
 
   const src = root.attributes.src.value;
   const type = root.attributes.type.value;
-  const resetting = root.attributes.reset;
   const loop = root.attributes.loop;
 
-  const btn = document.createElement("button");
-  btn.innerHTML = root.innerHTML;
-  btn.classList.add("audio-control");
-  btn.classList.add("play");
-  root.innerHTML = "";
+  const btn = DOMcreatePlayButton();
 
   const audio = DOMcreateAudio(src, type, loop);
   const controls = DOMcreateAudioControls();
@@ -28,7 +23,7 @@ function createSoundEffectNode(root, withTimeline) {
 
   linkControls();
 
-  if (resetting) {
+  if (root.attributes.reset) {
     makeResetable();
   } else {
     makeStoppable();
@@ -73,6 +68,13 @@ function createSoundEffectNode(root, withTimeline) {
 }
 
 // ***************** GENERICS *****************
+
+function DOMcreatePlayButton() {
+  const btn = document.createElement("button");
+  btn.classList.add("audio-control");
+  btn.classList.add("play");
+  return btn;
+}
 
 function DOMcreateAudio(src, type, loop) {
   const audio = document.createElement("audio");

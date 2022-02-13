@@ -1,8 +1,12 @@
 :root {
+  /* --color-primary: #3183ec; */
+  /* --color-primary-active: #7ed8f4; */
+  --color-primary: #893fe3;
+  --color-primary-active: #3183ec;
   --audio-timeline-bg-color: #4a4a4a;
   --audio-timeline-bg-played-color: rgba(140, 140, 140, 0.5);
   --audio-timeline-thumb-color: #ffffff;
-  --audio-timeline-bg-loop-color: rgb(104, 200, 102);
+  --audio-timeline-bg-loop-color: var(--color-primary);
   --audio-timeline-bg-loop-inactive-color: rgb(127, 127, 127);
 }
 
@@ -24,43 +28,8 @@ body {
   padding: 2rem;
 }
 
-sound-effect {
-  position: relative;
-  margin-bottom: 1rem;
-  display: flex;
-}
-audio-loop {
-  position: relative;
-  margin-bottom: 1rem;
-  display: flex;
-}
-
-audio.custom-audio {
-  flex-grow: 1;
-}
-button.audio-control.play {
-  width: 30%;
-}
-button.audio-control.play::before {
-  content: '\25BA';
-}
-button.audio-control.play.playing {
-  background-color: orange;
-}
-button.audio-control.play.playing::before {
-  content: '\25A0';
-}
-button.audio-control.play.playing.reset::before {
-  content: '\21BA';
-}
-
-button.audio-control.loop {
-  width: 3rem;
-  background-color: var(--audio-timeline-bg-loop-inactive-color);
-}
-button.audio-control.loop.looping {
-  background-color: var(--audio-timeline-bg-loop-color);
-}
-button.audio-control.loop::before {
-  content: '\21BA';
+button {
+  background-color: var(--color-primary);
+  color: #000000;
+  border: 0;
 }

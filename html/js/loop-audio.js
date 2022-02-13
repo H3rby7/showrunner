@@ -24,14 +24,14 @@ function createAudioLoopNode(root) {
 
   function activateLoop() {
     looping = true;
-    loopBtn.textContent = "ON";
+    // loopBtn.textContent = "ON";
     loopBtn.classList.add("looping");
     paintLoop(true);
   }
 
   function exitLoop() {
     looping = false;
-    loopBtn.textContent = "OFF";
+    // loopBtn.textContent = "OFF";
     loopBtn.classList.remove("looping");
     paintLoop(false);
     if (tO) {
@@ -81,7 +81,7 @@ function createAudioLoopNode(root) {
 
 function gradientForLoop(loopStart, loopEnd, duration, active) {
   const regularBackground = "var(--audio-timeline-bg-color)";
-  const loopBackground = active ? "var(--audio-timeline-bg-loop-color)" : "var(--audio-timeline-bg-loop-inactive-color)";
+  const loopBackground = active ? "var(--color-primary-active)" : "var(--color-primary)";
   const start = calcPrioLower(loopStart);
   const end = calcPrioLower(loopEnd);
   return `linear-gradient(90deg, ${regularBackground} 0%, ${regularBackground} ${start}%, ${loopBackground} ${start}%, ${loopBackground} ${end}%, ${regularBackground} ${end}%, ${regularBackground} 100%)`;

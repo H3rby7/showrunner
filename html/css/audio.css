@@ -1,5 +1,78 @@
+sound-effect {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+}
+audio-loop {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+audio.custom-audio {
+  flex-grow: 1;
+}
+button.audio-control {
+  margin: 0 2px;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+button.audio-control::before {
+  position: absolute;
+}
+
+/* PLAY Sign */
+button.audio-control.play::before {
+  font-size: 2.55rem;
+  top: -10%;
+  left: 17%;
+  content: '\25B7';
+}
+
+button.audio-control.play.playing {
+  font-weight: bold;
+  background-color: var(--color-primary-active);
+}
+
+/* STOP Sign */
+button.audio-control.play.playing::before {
+  font-size: 4rem;
+  top: -44%;
+  left: 2%;
+  content: '\25A1';
+}
+
+/* REPLAY FROM START Sign */
+button.audio-control.play.playing.reset::before {
+  content: '\21BA';
+}
+
+/* LOOP Sign */
+button.audio-control.loop::before {
+  font-size: 3rem;
+  top: -18%;
+  left: 0%;
+  content: '\21BA';
+}
+
+button.audio-control.loop {
+  background-color: var(--audio-timeline-bg-loop-color);
+}
+button.audio-control.loop.looping {
+  /* color: var(--color-primary-active); */
+  background-color: var(--color-primary-active);
+  /* outline: 2px solid var(--color-primary-active); */
+}
+
+/***********************************************/
+/************** TIME-RANGE *********************/
+/***********************************************/
+
 :root {
-  --audio-timeline-height: 2rem;
+  --audio-timeline-height: 3rem;
   --audio-timeline-thumb-width: 4px;
 }
 
@@ -11,6 +84,8 @@ input[type="range"] {
   background-position: left;
   cursor: pointer;
   width: 50rem;
+  height: var(--audio-timeline-height);
+  margin: 0;
 }
 
 /* Removes default focus */
