@@ -1,5 +1,5 @@
 function createAudioLoopNode(root) {
-  createSoundEffectNode(root);
+  createSoundEffectNode(root, true);
   let looping = true;
   let tO;
   const loopStart = root.attributes.loopStart.value;

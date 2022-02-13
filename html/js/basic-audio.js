@@ -1,6 +1,6 @@
 // ***************** SOUND/MUSIC *****************
 
-function createSoundEffectNode(root) {
+function createSoundEffectNode(root, withTimeline) {
   let playing = false;
 
   const src = root.attributes.src.value;
@@ -16,7 +16,11 @@ function createSoundEffectNode(root) {
 
   const audio = DOMcreateAudio(src, type, loop);
   const controls = DOMcreateAudioControls();
-  const timeline = controls.querySelector(".audio-timeline");
+
+  if (withTimeline) {
+    const timeline = DOMcreateTimeline(audio);
+    controls.appendChild(timeline);
+  }
 
   root.appendChild(btn);
   root.appendChild(audio);
@@ -65,18 +69,6 @@ function createSoundEffectNode(root) {
       playing = true;
       btn.classList.add("playing");
     });
-    // Setup Timeline using audio duration
-    audio.addEventListener("loadedmetadata", () => {
-      timeline.max = audio.duration;
-      timeline.step = audio.duration / 1000;
-    }, {once: true});
-    // Link Audio and Timeline
-    timeline.addEventListener("change", ({target: {value}}) => {
-      audio.currentTime = value;
-    });
-    audio.addEventListener("timeupdate", ({target: {currentTime}}) => {
-      timeline.value = currentTime;
-    });
   }
 }
 
@@ -95,6 +87,10 @@ function DOMcreateAudio(src, type, loop) {
 function DOMcreateAudioControls() {
   const div = document.createElement("div");
   div.classList.add("audio-controls");
+  return div;
+}
+
+function DOMcreateTimeline(audio) {
 
   const timeline = document.createElement("input");
   timeline.id = "audioTimeline-" + makeid(5);
@@ -102,12 +98,25 @@ function DOMcreateAudioControls() {
   timeline.autocomplete = false;
   timeline.type = "range";
   timeline.value = 0;
-  div.appendChild(timeline);
 
-  return div;
+  // Setup Timeline using audio duration
+  audio.addEventListener("loadedmetadata", () => {
+    timeline.max = audio.duration;
+    timeline.step = audio.duration / 1000;
+  }, {once: true});
+
+  // Link Audio and Timeline
+  timeline.addEventListener("change", ({target: {value}}) => {
+    audio.currentTime = value;
+  });
+  audio.addEventListener("timeupdate", ({target: {currentTime}}) => {
+    timeline.value = currentTime;
+  });
+
+  return timeline;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("sound-effect")
-    .forEach(createSoundEffectNode);
+    .forEach((el) => createSoundEffectNode(el, false));
 }, {once: true});
