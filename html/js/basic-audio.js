@@ -3,6 +3,7 @@
 function createSoundEffectNode(root, withTimeline) {
   let playing = false;
 
+  const labelText = root.attributes.label.value;
   const src = root.attributes.src.value;
   const type = root.attributes.type.value;
   const loop = root.attributes.loop;
@@ -12,11 +13,12 @@ function createSoundEffectNode(root, withTimeline) {
   const audio = DOMcreateAudio(src, type, loop);
   const controls = DOMcreateAudioControls();
 
-  if (withTimeline) {
+  if (withTimeline || root.attributes.timeline) {
     const timeline = DOMcreateTimeline(audio);
     controls.appendChild(timeline);
   }
 
+  root.appendChild(DOMcreateAudioLabel(labelText));
   root.appendChild(btn);
   root.appendChild(audio);
   root.appendChild(controls);
@@ -68,6 +70,13 @@ function createSoundEffectNode(root, withTimeline) {
 }
 
 // ***************** GENERICS *****************
+
+function DOMcreateAudioLabel(text) {
+  const label = document.createElement("div");
+  label.classList.add("audio-label");
+  label.innerHTML = text;
+  return label;
+}
 
 function DOMcreatePlayButton() {
   const btn = document.createElement("button");

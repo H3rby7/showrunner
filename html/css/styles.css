@@ -3,6 +3,7 @@
   /* --color-primary-active: #7ed8f4; */
   --color-primary: #893fe3;
   --color-primary-active: #3183ec;
+  --color-text: #dddddd;
   --audio-timeline-bg-color: #4a4a4a;
   --audio-timeline-bg-played-color: rgba(140, 140, 140, 0.5);
   --audio-timeline-thumb-color: #ffffff;
@@ -24,7 +25,7 @@ body {
   width: inherit;
 }
 #show-music, #show-sfx {
-  width: 50%;
+  width: 30rem;
   padding: 2rem;
 }
 

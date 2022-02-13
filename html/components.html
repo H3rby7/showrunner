@@ -6,17 +6,25 @@
     .cpt-section {
       display: block;
       margin: 2rem;
+      width: 50%;
+    }
+    .cpt-section > div {
+      width: inherit;
+      display: flex;
+      margin-bottom: 8px;
     }
   </style>
 </head>
-
-<div class="cpt-section">
-  <div>
-    <button class="audio-control play"></button>
-  </div>
-  <div>
+<div class="cpt-section" style="display: flex;">
+  <sound-effect>
     <button class="audio-control play playing"></button>
-  </div>
+  </sound-effect>
+  <sound-effect>
+    <button class="audio-control play"></button>
+  </sound-effect>
+  <sound-effect>
+    <button class="audio-control play reset playing"></button>
+  </sound-effect>
 </div>
 <div class="cpt-section">
   <div>
@@ -47,4 +55,14 @@
       background: linear-gradient(90deg, var(--audio-timeline-bg-color) 0%, var(--audio-timeline-bg-color) 10%, var(--color-primary-active) 10%, var(--color-primary-active) 37%, var(--audio-timeline-bg-color) 37%, var(--audio-timeline-bg-color) 100%);
     }
   </style>
+</div>
+<div class="cpt-section">
+  <sound-effect>
+    <div class="audio-label">Call Incoming</div>
+    <button class="audio-control play"></button>
+  </sound-effect>
+  <sound-effect>
+    <div class="audio-label">All of Me MLB</div>
+    <button class="audio-control play playing"></button>
+  </sound-effect>
 </div>

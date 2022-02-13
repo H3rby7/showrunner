@@ -7,13 +7,33 @@ audio-loop {
   position: relative;
   margin-bottom: 1rem;
   display: flex;
+  width: 100%;
 }
 
 audio.custom-audio {
   flex-grow: 1;
 }
+
+.audio-label {
+  width: 10rem;
+  height: 3rem;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  display: flex;
+  word-wrap: break-word;
+  overflow: hidden;
+  align-items: center;
+  justify-content: left;
+}
+
+.audio-controls {
+  flex-grow: 1;
+  display: flex;
+}
+
 button.audio-control {
-  margin: 0 2px;
+  margin-right: 4px;
   width: 3rem;
   height: 3rem;
   padding: 0;
@@ -34,12 +54,12 @@ button.audio-control.play::before {
 }
 
 button.audio-control.play.playing {
-  font-weight: bold;
   background-color: var(--color-primary-active);
 }
 
 /* STOP Sign */
 button.audio-control.play.playing::before {
+  font-weight: bold;
   font-size: 4rem;
   top: -44%;
   left: 2%;
@@ -48,14 +68,18 @@ button.audio-control.play.playing::before {
 
 /* REPLAY FROM START Sign */
 button.audio-control.play.playing.reset::before {
-  content: '\21BA';
+  font-weight: normal;
+  font-size: 2.6rem;
+  top: -16%;
+  left: 6%;
+  content: '\21AA';
 }
 
 /* LOOP Sign */
 button.audio-control.loop::before {
-  font-size: 3rem;
-  top: -18%;
-  left: 0%;
+  font-size: 2.6rem;
+  top: -9%;
+  left: 6%;
   content: '\21BA';
 }
 
@@ -83,10 +107,10 @@ input[type="range"] {
   appearance: none;
   background: transparent;
   cursor: pointer;
-  width: 50rem;
   height: var(--audio-timeline-height);
   margin: 0;
   display: inline-flex;
+  flex-grow: 1;
 }
 
 /* Removes default focus */
