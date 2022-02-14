@@ -2,10 +2,12 @@
 
 function createSoundEffectNode(root, withTimeline) {
   const audio = DOMcreateAudio(root.attributes.src.value, root.attributes.type.value, root.attributes.loop);
+  const volume = DOMcreateVolumeControl(audio);
   const btn = DOMcreatePlayButton(audio, root.attributes.reset);
   const controls = DOMcreateAudioControls();
 
   controls.appendChild(btn);
+  controls.appendChild(volume);
 
   if (withTimeline || root.attributes.timeline) {
     const timeline = DOMcreateTimeline(audio);
@@ -28,6 +30,26 @@ function DOMcreateAudioLabel(text) {
   return label;
 }
 
+function DOMcreateVolumeControl(audio) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("audio-volume");
+
+  const control = document.createElement("input");
+  control.autocomplete = false;
+  control.type = "range";
+  control.min = 0;
+  control.max = 1;
+  control.step = 0.01
+  wrapper.appendChild(control);
+
+  // Link Volume to Audio
+  control.addEventListener("input", ({target: {value}}) => {
+    audio.volume = value;
+  });
+
+  return wrapper;
+}
+
 function DOMcreatePlayButton(audio, resetable) {
   let playing = false;
   const btn = document.createElement("button");
@@ -41,6 +63,7 @@ function DOMcreatePlayButton(audio, resetable) {
     if (resetable) {
       audio.currentTime = 0;
       audio.play();
+      return;
     }
     if (playing) {
       audio.currentTime = 0;
