@@ -1,5 +1,6 @@
 :root {
   --audio-controls-height: 3rem;
+  --audio-controls-margin-right: 4px;
 }
 
 sound-effect {
@@ -37,7 +38,7 @@ audio.custom-audio {
 }
 
 button.audio-control {
-  margin-right: 4px;
+  margin-right: var(--audio-controls-margin-right);
   width: var(--audio-controls-height);
   height: var(--audio-controls-height);
   padding: 0;
@@ -96,9 +97,9 @@ button.audio-control.loop.looping {
   /* outline: 2px solid var(--color-primary-active); */
 }
 
-/***********************************************/
-/************** TIME-RANGE *********************/
-/***********************************************/
+/***************************************************************************************************************************************/
+/********************************************************** TIME-RANGE *****************************************************************/
+/***************************************************************************************************************************************/
 
 :root {
   --audio-timeline-height: var(--audio-controls-height);
@@ -186,20 +187,22 @@ input[type="range"].audio-timeline::-moz-range-progress {
 }
 
 
-/***********************************************/
-/************** AUDIO-VOL. *********************/
-/***********************************************/
+/***************************************************************************************************************************************/
+/********************************************************** AUDIO-VOL. *****************************************************************/
+/***************************************************************************************************************************************/
 
 
 :root {
-  --audio-volume-width: 0.5rem;
+  --audio-volume-width: 1rem;
   --audio-volume-height: var(--audio-controls-height);
+  --audio-volume-bg-width: calc(var(--audio-volume-width) / 4);
 }
 
 /*********** Baseline, reset styles ***********/
 .audio-volume {
   width: var(--audio-volume-width);
   height: var(--audio-volume-height);
+  margin-right: var(--audio-controls-margin-right);
   position: relative;
 }
 
@@ -228,7 +231,7 @@ input[type="range"].audio-timeline::-moz-range-progress {
 .audio-volume input[type="range"]::-webkit-slider-runnable-track {
   background-color: var(--audio-volume-bg-color);
   border-radius: 0;
-  height: var(--audio-volume-width);
+  height: var(--audio-volume-bg-width);
 }
 
 /* slider thumb */
@@ -236,9 +239,9 @@ input[type="range"].audio-timeline::-moz-range-progress {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: 0px;
-  background-color: transparent;
+  background-color: #ffffff;
   border-radius: 0;
-  height: 0;
+  height: var(--audio-volume-width);
   width: 0;
 }
 
@@ -248,14 +251,16 @@ input[type="range"].audio-timeline::-moz-range-progress {
 
 /* NOT SURE!!! Might be -> slider 'played parts' for chrome etc. */
 .audio-volume input[type="range"]::before {
-  background-color: var(--audio-volume-bg-present-color);
+  background: var(--audio-volume-bg-present-color);
+  background-size: var(--audio-volume-height);
   height: var(--audio-volume-width);
 }
 
 /*********** MS styles ***************/
 /* slider 'played parts' */
 .audio-volume input[type="range"]::-ms-fill-lower {
-  background-color: var(--audio-volume-bg-present-color);
+  background: var(--audio-volume-bg-present-color);
+  background-size: var(--audio-volume-height);
   height: var(--audio-volume-width);
 }
 
@@ -264,16 +269,16 @@ input[type="range"].audio-timeline::-moz-range-progress {
 .audio-volume input[type="range"]::-moz-range-track {
   background-color: var(--audio-volume-bg-color);
   border-radius: 0;
-  height: var(--audio-volume-width);
+  height: var(--audio-volume-bg-width);
 }
 
 /* slider thumb */
 .audio-volume input[type="range"]::-moz-range-thumb {
-  background-color: transparent;
+  background-color: #ffffff;
   border: none; /*Removes extra border that FF applies*/
   border-radius: 0;
-  height: 0;
-  width: 0;
+  height: var(--audio-volume-width);
+  width: 2px;
 }
 
 .audio-volume input[type="range"]:focus::-moz-range-thumb{
@@ -282,6 +287,7 @@ input[type="range"].audio-timeline::-moz-range-progress {
 
 /* slider 'played parts' */
 .audio-volume input[type="range"]::-moz-range-progress {
-  background-color: var(--audio-volume-bg-present-color);
+  background: var(--audio-volume-bg-present-color);
+  background-size: var(--audio-volume-height);
   height: var(--audio-volume-width);
 }

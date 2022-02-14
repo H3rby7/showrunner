@@ -8,7 +8,7 @@
   --audio-timeline-bg-played-color: rgba(140, 140, 140, 0.5);
   --audio-timeline-thumb-color: #ffffff;
   --audio-volume-bg-color: #4a4a4a;
-  --audio-volume-bg-present-color: var(--color-primary);
+  --audio-volume-bg-present-color: linear-gradient(90deg, var(--color-primary) 0%, #ffffff 100%);
 }
 
 body {
