@@ -76,7 +76,7 @@ function createAudioLoopNode(root) {
   }, {once: true});
 
   controls.appendChild(style);
-  controls.insertBefore(loopBtn, controls.querySelector(".audio-volume"));
+  controls.insertBefore(loopBtn, timeline);
   return root;
 }
 

@@ -1,13 +1,14 @@
 // ***************** SOUND/MUSIC *****************
 
 function createSoundEffectNode(root, withTimeline) {
-  const audio = DOMcreateAudio(root.attributes.src.value, root.attributes.type.value, root.attributes.loop);
+  const initVol = root.attributes.vol.value;
+  const audio = DOMcreateAudio(root.attributes.src.value, root.attributes.type.value, initVol, root.attributes.loop);
   const volume = DOMcreateVolumeControl(audio);
   const btn = DOMcreatePlayButton(audio, root.attributes.reset);
   const controls = DOMcreateAudioControls();
 
-  controls.appendChild(btn);
   controls.appendChild(volume);
+  controls.appendChild(btn);
 
   if (withTimeline || root.attributes.timeline) {
     const timeline = DOMcreateTimeline(audio);
@@ -40,6 +41,7 @@ function DOMcreateVolumeControl(audio) {
   control.min = 0;
   control.max = 1;
   control.step = 0.01
+  control.value = audio.volume;
   wrapper.appendChild(control);
 
   // Link Volume to Audio
@@ -90,12 +92,13 @@ function DOMcreatePlayButton(audio, resetable) {
   return btn;
 }
 
-function DOMcreateAudio(src, type, loop) {
+function DOMcreateAudio(src, type, initVol, loop) {
   const audio = document.createElement("audio");
   audio.classList.add("custom-audio");
   audio.src = src;
   audio.type = type;
   audio.preload = "auto";
+  audio.volume = initVol;
   if (loop) audio.loop = true;
   return audio;
 }
