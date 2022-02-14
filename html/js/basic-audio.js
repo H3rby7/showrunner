@@ -1,72 +1,22 @@
 // ***************** SOUND/MUSIC *****************
 
 function createSoundEffectNode(root, withTimeline) {
-  let playing = false;
-
-  const labelText = root.attributes.label.value;
-  const src = root.attributes.src.value;
-  const type = root.attributes.type.value;
-  const loop = root.attributes.loop;
-
-  const btn = DOMcreatePlayButton();
-
-  const audio = DOMcreateAudio(src, type, loop);
+  const audio = DOMcreateAudio(root.attributes.src.value, root.attributes.type.value, root.attributes.loop);
+  const btn = DOMcreatePlayButton(audio, root.attributes.reset);
   const controls = DOMcreateAudioControls();
+
+  controls.appendChild(btn);
 
   if (withTimeline || root.attributes.timeline) {
     const timeline = DOMcreateTimeline(audio);
     controls.appendChild(timeline);
   }
 
-  root.appendChild(DOMcreateAudioLabel(labelText));
-  root.appendChild(btn);
+  root.appendChild(DOMcreateAudioLabel(root.attributes.label.value));
   root.appendChild(audio);
   root.appendChild(controls);
 
-  linkControls();
-
-  if (root.attributes.reset) {
-    makeResetable();
-  } else {
-    makeStoppable();
-  }
-
   return root;
-
-  function makeResetable() {
-    btn.classList.add("reset");
-    btn.addEventListener("click", () => {
-      audio.currentTime = 0;
-      audio.play();
-    });
-  }
-  
-  function makeStoppable() {
-    btn.addEventListener("click", () => {
-      if (playing) {
-        audio.currentTime = 0;
-        audio.pause();
-      } else {
-        audio.play();
-      }
-    });
-  }
-
-  function linkControls() {
-    // STATE TRANSITIONS by Events
-    audio.addEventListener("ended", () => {
-      playing = false;
-      btn.classList.remove("playing");
-    });
-    audio.addEventListener("pause", () => {
-      playing = false;
-      btn.classList.remove("playing");
-    });
-    audio.addEventListener("play", () => {
-      playing = true;
-      btn.classList.add("playing");
-    });
-  }
 }
 
 // ***************** GENERICS *****************
@@ -78,10 +28,42 @@ function DOMcreateAudioLabel(text) {
   return label;
 }
 
-function DOMcreatePlayButton() {
+function DOMcreatePlayButton(audio, resetable) {
+  let playing = false;
   const btn = document.createElement("button");
   btn.classList.add("audio-control");
   btn.classList.add("play");
+  if (resetable) {
+    btn.classList.add("reset");
+  }
+
+  btn.addEventListener("click", () => {
+    if (resetable) {
+      audio.currentTime = 0;
+      audio.play();
+    }
+    if (playing) {
+      audio.currentTime = 0;
+      audio.pause();
+    } else {
+      audio.play();
+    }
+  });
+
+  // STATE TRANSITIONS by Events
+  audio.addEventListener("ended", () => {
+    playing = false;
+    btn.classList.remove("playing");
+  });
+  audio.addEventListener("pause", () => {
+    playing = false;
+    btn.classList.remove("playing");
+  });
+  audio.addEventListener("play", () => {
+    playing = true;
+    btn.classList.add("playing");
+  });
+
   return btn;
 }
 

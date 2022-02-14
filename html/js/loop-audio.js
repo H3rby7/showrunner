@@ -6,6 +6,7 @@ function createAudioLoopNode(root) {
   const loopEnd = root.attributes.loopEnd.value;
 
   const audio = root.querySelector("audio");
+  const controls = root.querySelector(".audio-controls");
   const timeline = root.querySelector(".audio-timeline");
 
   const style = document.createElement("style");
@@ -74,8 +75,8 @@ function createAudioLoopNode(root) {
     activateLoop();
   }, {once: true});
 
-  root.appendChild(style);
-  root.insertBefore(loopBtn, root.children[2])
+  controls.appendChild(style);
+  controls.insertBefore(loopBtn, timeline);
   return root;
 }
 
