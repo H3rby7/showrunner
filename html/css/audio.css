@@ -1,3 +1,7 @@
+:root {
+  --audio-controls-height: 3rem;
+}
+
 sound-effect {
   position: relative;
   margin-bottom: 1rem;
@@ -16,7 +20,7 @@ audio.custom-audio {
 
 .audio-label {
   width: 10rem;
-  height: 3rem;
+  height: var(--audio-controls-height);
   color: var(--color-text);
   font-size: 1.5rem;
   line-height: 1.5rem;
@@ -34,8 +38,8 @@ audio.custom-audio {
 
 button.audio-control {
   margin-right: 4px;
-  width: 3rem;
-  height: 3rem;
+  width: var(--audio-controls-height);
+  height: var(--audio-controls-height);
   padding: 0;
   position: relative;
   overflow: hidden;
@@ -84,7 +88,7 @@ button.audio-control.loop::before {
 }
 
 button.audio-control.loop {
-  background-color: var(--audio-timeline-bg-loop-color);
+  background-color: var(--color-primary);
 }
 button.audio-control.loop.looping {
   /* color: var(--color-primary-active); */
@@ -97,12 +101,12 @@ button.audio-control.loop.looping {
 /***********************************************/
 
 :root {
-  --audio-timeline-height: 3rem;
+  --audio-timeline-height: var(--audio-controls-height);
   --audio-timeline-thumb-width: 4px;
 }
 
 /*********** Baseline, reset styles ***********/
-input[type="range"] {
+input[type="range"].audio-timeline {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -114,20 +118,20 @@ input[type="range"] {
 }
 
 /* Removes default focus */
-input[type="range"]:focus {
+input[type="range"].audio-timeline:focus {
   outline: none;
 }
 
 /******** Chrome, Safari, Opera and Edge Chromium styles ********/
 /* slider track */
-input[type="range"]::-webkit-slider-runnable-track {
+input[type="range"].audio-timeline::-webkit-slider-runnable-track {
   background-color: var(--audio-timeline-bg-color);
   border-radius: 0;
   height: var(--audio-timeline-height);
 }
 
 /* slider thumb */
-input[type="range"]::-webkit-slider-thumb {
+input[type="range"].audio-timeline::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: 0px; /* Centers thumb on the track */
@@ -137,33 +141,33 @@ input[type="range"]::-webkit-slider-thumb {
   width: var(--audio-timeline-thumb-width);
 }
 
-input[type="range"]:focus::-webkit-slider-thumb {
+input[type="range"].audio-timeline:focus::-webkit-slider-thumb {
   outline: none;
 }
 
 /* NOT SURE!!! Might be -> slider 'played parts' for chrome etc. */
-input[type="range"]::before {
+input[type="range"].audio-timeline::before {
   background-color: var(--audio-timeline-bg-played-color);
   height: var(--audio-timeline-height);
 }
 
 /*********** MS styles ***************/
 /* slider 'played parts' */
-input[type="range"]::-ms-fill-lower {
+input[type="range"].audio-timeline::-ms-fill-lower {
   background-color: var(--audio-timeline-bg-played-color);
   height: var(--audio-timeline-height);
 }
 
 /*********** Firefox styles ***********/
 /* slider track */
-input[type="range"]::-moz-range-track {
+input[type="range"].audio-timeline::-moz-range-track {
   background-color: var(--audio-timeline-bg-color);
   border-radius: 0;
   height: var(--audio-timeline-height);
 }
 
 /* slider thumb */
-input[type="range"]::-moz-range-thumb {
+input[type="range"].audio-timeline::-moz-range-thumb {
   background-color: var(--audio-timeline-thumb-color);
   border: none; /*Removes extra border that FF applies*/
   border-radius: 0;
@@ -171,12 +175,113 @@ input[type="range"]::-moz-range-thumb {
   width: var(--audio-timeline-thumb-width);
 }
 
-input[type="range"]:focus::-moz-range-thumb{
+input[type="range"].audio-timeline:focus::-moz-range-thumb{
   outline: none;
 }
 
 /* slider 'played parts' */
-input[type="range"]::-moz-range-progress {
+input[type="range"].audio-timeline::-moz-range-progress {
   background-color: var(--audio-timeline-bg-played-color);
   height: var(--audio-timeline-height);
+}
+
+
+/***********************************************/
+/************** AUDIO-VOL. *********************/
+/***********************************************/
+
+
+:root {
+  --audio-volume-width: 0.5rem;
+  --audio-volume-height: var(--audio-controls-height);
+}
+
+/*********** Baseline, reset styles ***********/
+.audio-volume {
+  width: var(--audio-volume-width);
+  height: var(--audio-volume-height);
+  position: relative;
+}
+
+.audio-volume input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: var(--audio-volume-width);
+  width: var(--audio-volume-height);
+  margin: 0;
+  transform: rotate(-90deg);
+  transform-origin: left;
+  position: absolute;
+  bottom: calc(var(--audio-volume-width) / -2);
+  left: calc(var(--audio-volume-width) / 2);
+}
+
+/* Removes default focus */
+.audio-volume input[type="range"]:focus {
+  outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+.audio-volume input[type="range"]::-webkit-slider-runnable-track {
+  background-color: var(--audio-volume-bg-color);
+  border-radius: 0;
+  height: var(--audio-volume-width);
+}
+
+/* slider thumb */
+.audio-volume input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: 0px;
+  background-color: transparent;
+  border-radius: 0;
+  height: 0;
+  width: 0;
+}
+
+.audio-volume input[type="range"]:focus::-webkit-slider-thumb {
+  outline: none;
+}
+
+/* NOT SURE!!! Might be -> slider 'played parts' for chrome etc. */
+.audio-volume input[type="range"]::before {
+  background-color: var(--audio-volume-bg-present-color);
+  height: var(--audio-volume-width);
+}
+
+/*********** MS styles ***************/
+/* slider 'played parts' */
+.audio-volume input[type="range"]::-ms-fill-lower {
+  background-color: var(--audio-volume-bg-present-color);
+  height: var(--audio-volume-width);
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+.audio-volume input[type="range"]::-moz-range-track {
+  background-color: var(--audio-volume-bg-color);
+  border-radius: 0;
+  height: var(--audio-volume-width);
+}
+
+/* slider thumb */
+.audio-volume input[type="range"]::-moz-range-thumb {
+  background-color: transparent;
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 0;
+  height: 0;
+  width: 0;
+}
+
+.audio-volume input[type="range"]:focus::-moz-range-thumb{
+  outline: none;
+}
+
+/* slider 'played parts' */
+.audio-volume input[type="range"]::-moz-range-progress {
+  background-color: var(--audio-volume-bg-present-color);
+  height: var(--audio-volume-width);
 }
