@@ -137,8 +137,3 @@ function DOMcreateTimeline(audio) {
 
   return timeline;
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("sound-effect")
-    .forEach((el) => createSoundEffectNode(el, false));
-}, {once: true});

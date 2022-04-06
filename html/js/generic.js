@@ -14,3 +14,13 @@ function makeid(length) {
    _usedIDs.push(result);
    return result;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("sound-effect")
+    .forEach((el) => createSoundEffectNode(el, false));
+  document.querySelectorAll("audio-loop")
+    .forEach(createAudioLoopNode);
+  // AFTER audios have been created...
+  document.querySelectorAll("audio-link")
+    .forEach(createAudioLinkNode);
+}, {once: true});

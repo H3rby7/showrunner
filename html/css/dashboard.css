@@ -1,18 +1,20 @@
 #dashboard {
-  position: sticky;
+  position: fixed;
   width: 100vw;
+  background-color: #171717;
+  z-index: 100;
 }
 
 #dashboard .db-content {
   width: 100%;
-  height: 80vh;
-  border-bottom: 1px solid #4a4a4a;
+  max-height: 80vh;
+  border-bottom: 1px solid var(--audio-timeline-bg-color);
   transition: 300ms;
   overflow-y: scroll;
 }
 
 #dashboard.collapsed .db-content {
-  height: 0;
+  max-height: 20px;
   overflow: hidden;
 }
 
@@ -26,7 +28,7 @@
 #toggle-dash {
   position: absolute;
   background-color: transparent;
-  color: #4a4a4a;
+  color: var(--audio-timeline-bg-color);
   font-weight: 700;
   top: 0;
   font-size: 3rem;
@@ -34,7 +36,7 @@
 
 #toggle-dash:hover, #toggle-dash:active {
   cursor: pointer;
-  color: #dddddd;
+  color: var(--color-text);
 }
 
 #dashboard.collapsed #toggle-dash {

@@ -8,9 +8,11 @@
   <script src="html/js/basic-audio.js"></script>
   <script src="html/js/loop-audio.js"></script>
   <script src="html/js/dashboard.js"></script>
+  <script src="html/js/show-point.js"></script>
   <link href="html/css/styles.css" rel="stylesheet">
   <link href="html/css/dashboard.css" rel="stylesheet">
   <link href="html/css/audio.css" rel="stylesheet">
+  <link href="html/css/show-point.css" rel="stylesheet">
 </head>
 
 <body>
@@ -64,5 +66,15 @@
     </div>
   </div>
   <!-- ******************* DASHBOARD ENDED -->
+  <div id="the-play">
+    <show-point>
+      <trigger class="text">Nehmen wir an hier steht ein längerer Text, ..., aber nicht so lange, dass es nicht doch weitergeht.</trigger>
+      <actions>
+        <light>Umbau</light>
+        <wait>3s</wait>
+        <audio-link tabindex="" for="zaz"></audio-link>
+      </actions>
+    </show-point>
+  </div>
 </body>
 </html>

@@ -96,8 +96,3 @@ function gradientForLoop(loopStart, loopEnd, duration, active) {
     return perc > percRounded ? percRounded : perc;
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("audio-loop")
-    .forEach(createAudioLoopNode);
-}, {once: true});

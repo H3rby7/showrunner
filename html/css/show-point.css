@@ -1,0 +1,82 @@
+:root {
+  --color-text-lights: #e3e33f;
+  --color-text-wait: #3f8ee3;
+  --color-text-audio: var(--color-text);
+}
+
+#the-play {
+  position: relative;
+  padding: 80vh 2rem 2rem 2rem;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  color: var(--color-text);
+}
+
+show-point {
+  position: relative;
+  display: block;
+  padding: 1rem;
+  background-color: var(--audio-timeline-bg-color);
+  border: 3px solid var(--audio-timeline-bg-played-color);
+}
+
+trigger {
+  font-size: 200%;
+  display: block;
+}
+
+trigger.event {
+  font-weight: 700;
+}
+
+trigger.text {
+  font-style: italic;
+}
+
+trigger.text::before,
+trigger.text::after {
+  content: '"';
+}
+
+actions {
+  display: block;
+  position: relative;
+  font-size: 150%;
+}
+
+actions > * {
+  margin-right: 1rem;
+  display: inline-block;
+  text-align: left;
+}
+
+light {
+  color: var(--color-text-lights);
+}
+
+light::before {
+  content: '\1F4A1'
+}
+
+wait {
+  color: var(--color-text-wait);
+}
+
+wait::before {
+  content: '\1F4A4'
+}
+
+audio-link button {
+  font-size: inherit;
+  color: var(--color-text-audio);
+  background-color: transparent;
+}
+
+audio-link button:hover, audio-link button:active, audio-link button:focus {
+  opacity: 0.5;
+}
+
+audio-link button::before {
+  content: '\1F508'
+}
