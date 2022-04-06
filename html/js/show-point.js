@@ -22,6 +22,9 @@ function createAudioLinkNode(root) {
     if (actionString === "start") {
       return start;
     }
+    if (actionString === "play-from-start") {
+      return playFromStart;
+    }
     if (actionString === "stop") {
       return stop;
     }
@@ -44,6 +47,11 @@ function createAudioLinkNode(root) {
 
   function start() {
     targetAudio.play();
+  }
+
+  function playFromStart() {
+    targetAudio.currentTime = 0;
+    start();
   }
 
   function stop() {
