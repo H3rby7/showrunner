@@ -1,94 +1,68 @@
 <!DOCTYPE html>
 <html lang="de-DE">
-  <head>
-    <meta charset="utf-8">
-    <title>ÜdV</title>
-    <script src="html/js/generic.js"></script>
-    <script src="html/js/basic-audio.js"></script>
-    <script src="html/js/loop-audio.js"></script>
-    <link href="html/css/styles.css" rel="stylesheet">
-    <link href="html/css/audio.css" rel="stylesheet">
-  </head>
-  <body>
-    <!-- Somehow the autoplay, muted, loop helps the browser Audio to stay 'active', so freshly run sounds are hearable from the start on -->
-    <audio preload="auto" loop muted autoplay>
-      <source src="notification.mp3" type="audio/mp3">
+
+<head>
+  <meta charset="utf-8">
+  <title>ÜdV</title>
+  <script src="html/js/generic.js"></script>
+  <script src="html/js/basic-audio.js"></script>
+  <script src="html/js/loop-audio.js"></script>
+  <script src="html/js/dashboard.js"></script>
+  <link href="html/css/styles.css" rel="stylesheet">
+  <link href="html/css/dashboard.css" rel="stylesheet">
+  <link href="html/css/audio.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Somehow the autoplay, muted, loop helps the browser Audio to stay 'active', so freshly run sounds are hearable from the start on -->
+  <audio preload="auto" loop muted autoplay>
+    <source src="media/notification.mp3" type="audio/mp3">
     Your browser does not support the audio element.
-    </audio>
-    <!-- ******************* PRE/POST SHOW START -->
-    <div id="pre-post-show">
-      <audio-loop src="manhattan lounge band - all of me.mp3"
-        loopStart=74566
-        loopEnd=78217
-        label="All of Me"
-        vol="0.8"
-        type="audio/mp3"></audio-loop>
-      <sound-effect src="preshow jazz.mp3"
-          type="audio/mp3"
-          label="Pre-/Post-Show"
-          vol="0.8"
-          timeline
-          loop></sound-effect>
-    </div>
-    <!-- ******************* PRE/POST SHOW END -->
-    <!-- ******************* SHOW START -->
-    <div id="show">
-      <!-- ******************* SOUND EFFECTS START -->
-      <div id="show-sfx">
-        <sound-effect src="Doorbell.mp3"
-          type="audio/mp3"
-          label="Türklingel"
-          vol="0.8"
-          reset></sound-effect>
-        <sound-effect src="notification.mp3"
-          type="audio/mp3"
-          label="Notification"
-          vol="0.8"
-          reset></sound-effect>
-        <sound-effect src="Skype -  Ringtone.mp3"
-          loop
-          label="Skype Anruf"
-          vol="0.8"
-          type="audio/mp3"></sound-effect>
-        <sound-effect src="Skype - End Call.mp3"
-          type="audio/mp3"
-          label="Skype Auflegen"
-          vol="0.8"
-          reset></sound-effect>
+  </audio>
+  <div id="dashboard">
+    <div class="db-content">
+      <!-- ******************* PRE/POST SHOW START -->
+      <div id="pre-post-show">
+        <sound-effect src="media/preshow jazz.mp3" type="audio/mp3" label="Pre-/Post-Show" vol="0.8" timeline loop>
+        </sound-effect>
       </div>
-      <!-- ******************* SOUND EFFECTS END -->
-  
-      <!-- ******************* MUSIC START -->
-      <div id="show-music">
-        <sound-effect src="zaz - je veux.mp3"
-          label="Zaz - Je Veux"
-          vol="0.8"
-          timeline
-          type="audio/mp3"></sound-effect>
-        <sound-effect src="manhattan lounge band - all of me.mp3"
-          label="Manhattan LB  <br> All Of Me"
-          vol="0.8"
-          timeline
-          type="audio/mp3"></sound-effect>
-        <sound-effect src="Maske 01 - I'll See You In My Dreams.mp3"
-          label="Maske 01"
-          vol="0.8"
-          timeline
-          type="audio/mp3"></sound-effect>
-        <sound-effect src="autumn atmo.mp3"
-          label="Herbst Atmo"
-          vol="0.8"
-          timeline
-          loop
-          type="audio/mp3"></sound-effect>
-        <sound-effect src="Soft positive guitar then piano - Demi-Lune.mp3"
-          label="Ausgeh-Fein"
-          vol="0.8"
-          timeline
-          type="audio/mp3"></sound-effect>
+      <!-- ******************* PRE/POST SHOW END -->
+      <!-- ******************* SHOW START -->
+      <div id="show">
+        <!-- ******************* SOUND EFFECTS START -->
+        <div id="show-sfx">
+          <sound-effect src="media/Doorbell.mp3" type="audio/mp3" label="Türklingel" id="doorbell" vol="0.8" reset>
+          </sound-effect>
+          <sound-effect src="media/notification.mp3" type="audio/mp3" label="Notification" id="sms" vol="0.8" reset>
+          </sound-effect>
+          <sound-effect src="media/Skype -  Ringtone.mp3" loop label="Skype Anruf" id="skypeIn" vol="0.8"
+            type="audio/mp3"></sound-effect>
+          <sound-effect src="media/Skype - End Call.mp3" type="audio/mp3" label="Skype Auflegen" id="skypeOut" vol="0.8"
+            reset></sound-effect>
+        </div>
+        <!-- ******************* SOUND EFFECTS END -->
+
+        <!-- ******************* MUSIC START -->
+        <div id="show-music">
+          <sound-effect src="media/zaz - je veux.mp3" label="Zaz - Je Veux" id="zaz" vol="0.8" timeline
+            type="audio/mp3"></sound-effect>
+          <sound-effect src="media/manhattan lounge band - all of me.mp3" label="Manhattan LB  <br> All Of Me" id="jazz"
+            vol="0.8" timeline type="audio/mp3"></sound-effect>
+          <sound-effect src="media/Maske 01 - I'll See You In My Dreams.mp3" label="Maske 01" id="mask01" vol="0.8"
+            timeline type="audio/mp3"></sound-effect>
+          <sound-effect src="media/autumn atmo.mp3" label="Herbst Atmo" id="autumn" vol="0.8" timeline loop
+            type="audio/mp3"></sound-effect>
+          <sound-effect src="media/Soft positive guitar then piano - Demi-Lune.mp3" label="Ausgeh-Fein" id="wheelchair"
+            vol="0.8" timeline type="audio/mp3"></sound-effect>
+        </div>
+        <!-- ******************* MUSIC ENDED -->
       </div>
-      <!-- ******************* MUSIC END -->
+      <!-- ******************* SHOW ENDED -->
     </div>
-    <!-- ******************* SHOW END -->
-  </body>
+    <div class="dashboard-ctrl">
+      <button id="toggle-dash" onclick="toggleDashboard(event)">^</button>
+    </div>
+  </div>
+  <!-- ******************* DASHBOARD ENDED -->
+</body>
 </html>
