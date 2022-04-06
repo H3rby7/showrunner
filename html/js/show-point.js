@@ -27,6 +27,9 @@ function createAudioLinkNode(root) {
     if (actionString === "fade-out-fast") {
       return () => {fadeOut(2000)};
     }
+    if (actionString === "fade-out-medium") {
+      return () => {fadeOut(5000)};
+    }
     if (actionString === "fade-out-slow") {
       return () => {fadeOut(10000)};
     }
