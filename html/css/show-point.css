@@ -84,10 +84,23 @@ audio-link button:hover, audio-link button:active, audio-link button:focus {
 }
 
 audio-link button::before {
-  content: '\1F508'
+  content: '\1F508';
 }
 
 audio-link[action="stop"] button::before,
 audio-link[action*="fade-out"] button::before {
-  content: '\1F507'
+  content: '\1F507';
+}
+
+audio-link[action="lower"] button::before {
+  content: '\1D193';
+  font-size: 200%;
+  font-weight: 700;
+  line-height: 0;
+  position: relative;
+  top: 1.3rem;
+}
+
+audio-link[action="reset"] button::before {
+  content: '\229C';
 }

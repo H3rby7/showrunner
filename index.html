@@ -36,7 +36,17 @@
         <audio-link for="preshow" action="fade-out-slow"></audio-link>
         <wait>1s</wait>
         <audio-link for="zaz" action="start"></audio-link>
+      </actions>
+    </show-point>
+    <show-point>
+      <trigger class="event">Sobald wieder gesprochen wird</trigger>
+      <actions>
         <audio-link for="zaz" action="lower"></audio-link>
+      </actions>
+    </show-point>
+    <show-point>
+      <trigger class="text">Okay voll schön!</trigger>
+      <actions>
         <audio-link for="zaz" action="reset"></audio-link>
       </actions>
     </show-point>
