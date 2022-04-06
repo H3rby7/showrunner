@@ -21,11 +21,29 @@
     <source src="media/notification.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
-  <div id="dashboard">
+  <div id="the-play">
+    <show-point>
+      <trigger class="event">PRESHOW</trigger>
+      <actions>
+        <light>Pause</light>
+        <audio-link for="preshow"></audio-link>
+      </actions>
+    </show-point>
+    <show-point>
+      <trigger class="text">Nehmen wir an hier steht ein längerer Text, ..., aber nicht so lange, dass es nicht doch weitergeht.</trigger>
+      <actions>
+        <light>Umbau</light>
+        <wait>3s</wait>
+        <audio-link for="zaz"></audio-link>
+      </actions>
+    </show-point>
+  </div>
+  <!-- ******************* PLAY ENDED -->
+  <div id="dashboard" class="collapsed">
     <div class="db-content">
       <!-- ******************* PRE/POST SHOW START -->
       <div id="pre-post-show">
-        <sound-effect src="media/preshow jazz.mp3" type="audio/mp3" label="Pre-/Post-Show" vol="0.8" timeline loop>
+        <sound-effect src="media/preshow jazz.mp3" id="preshow" type="audio/mp3" label="Pre-/Post-Show" vol="0.8" timeline loop>
         </sound-effect>
       </div>
       <!-- ******************* PRE/POST SHOW END -->
@@ -66,15 +84,5 @@
     </div>
   </div>
   <!-- ******************* DASHBOARD ENDED -->
-  <div id="the-play">
-    <show-point>
-      <trigger class="text">Nehmen wir an hier steht ein längerer Text, ..., aber nicht so lange, dass es nicht doch weitergeht.</trigger>
-      <actions>
-        <light>Umbau</light>
-        <wait>3s</wait>
-        <audio-link tabindex="" for="zaz"></audio-link>
-      </actions>
-    </show-point>
-  </div>
 </body>
 </html>

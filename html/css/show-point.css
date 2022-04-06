@@ -6,11 +6,16 @@
 
 #the-play {
   position: relative;
-  padding: 80vh 2rem 2rem 2rem;
+  padding: 2rem;
   width: 100vw;
   height: 100vh;
   overflow-y: scroll;
   color: var(--color-text);
+  transition: 300ms;
+}
+
+#the-play.pushed {
+  margin-top: 80vh;
 }
 
 show-point {
@@ -19,6 +24,7 @@ show-point {
   padding: 1rem;
   background-color: var(--audio-timeline-bg-color);
   border: 3px solid var(--audio-timeline-bg-played-color);
+  margin-bottom: 1rem;
 }
 
 trigger {

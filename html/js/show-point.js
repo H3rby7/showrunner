@@ -10,7 +10,7 @@ function createAudioLinkNode(root) {
     console.error(`Audio-Link: 'Play' Button with ID '${forId}' is not part of this page.`);
     return;
   }
-  const label = target.innerText;
+  const label = target.attributes.label.value;
   const btn = document.createElement("button");
   btn.innerText = label;
   root.addEventListener("click", () => {
