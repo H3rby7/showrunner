@@ -1,5 +1,4 @@
 function toggleDashboard() {
-  console.log("toggle");
   const CL = "collapsed";
   const CP = "pushed";
   const dashboard = document.getElementById("dashboard");

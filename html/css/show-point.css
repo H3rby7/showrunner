@@ -86,3 +86,8 @@ audio-link button:hover, audio-link button:active, audio-link button:focus {
 audio-link button::before {
   content: '\1F508'
 }
+
+audio-link[action="stop"] button::before,
+audio-link[action*="fade-out"] button::before {
+  content: '\1F507'
+}

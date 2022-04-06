@@ -53,7 +53,7 @@ function DOMcreateVolumeControl(audio) {
 }
 
 function DOMcreatePlayButton(rootId, audio, resetable) {
-  let playing = false;
+  audio.playing = false;
   const btn = document.createElement("button");
   if (rootId) {
     btn.id = `${rootId}-btn-play`;
@@ -70,7 +70,7 @@ function DOMcreatePlayButton(rootId, audio, resetable) {
       audio.play();
       return;
     }
-    if (playing) {
+    if (audio.playing) {
       audio.currentTime = 0;
       audio.pause();
     } else {
@@ -80,15 +80,15 @@ function DOMcreatePlayButton(rootId, audio, resetable) {
 
   // STATE TRANSITIONS by Events
   audio.addEventListener("ended", () => {
-    playing = false;
+    audio.playing = false;
     btn.classList.remove("playing");
   });
   audio.addEventListener("pause", () => {
-    playing = false;
+    audio.playing = false;
     btn.classList.remove("playing");
   });
   audio.addEventListener("play", () => {
-    playing = true;
+    audio.playing = true;
     btn.classList.add("playing");
   });
 
