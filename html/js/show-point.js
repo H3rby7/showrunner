@@ -11,6 +11,7 @@ function createAudioLinkNode(root) {
     console.error(`Audio-Link: targetAudio '${forId}' is not part of this page.`);
     return;
   }
+  let presetAudioLevel = targetAudio.volume;
   const label = target.attributes.label.value;
   const btn = document.createElement("button");
   btn.innerText = label;
@@ -33,6 +34,12 @@ function createAudioLinkNode(root) {
     if (actionString === "fade-out-slow") {
       return () => {fadeOut(10000)};
     }
+    if (actionString === "lower") {
+      return lower;
+    }
+    if (actionString === "reset") {
+      return reset;
+    }
   }
 
   function start() {
@@ -44,21 +51,42 @@ function createAudioLinkNode(root) {
     targetAudio.pause();
   }
 
+  function lower() {
+    presetAudioLevel = targetAudio.volume;
+    volumeTransition(1000, targetAudio.volume / 5);
+  }
+
+  function reset() {
+    volumeTransition(1000, presetAudioLevel);
+  }
+
   function fadeOut(ms) {
+    volumeTransition(ms, 0, () => {
+      stop();
+      targetAudio.volume = audioLevel;
+    });
+  }
+
+  function volumeTransition(duration, desiredVolume, finishHandler) {
     const steps = 20;
-    const intervalInMs = ms / steps;
+    const intervalInMs = duration / steps;
     const audioLevel = targetAudio.volume;
-    const audioDecrease = audioLevel / steps;
+    const audioChange = (audioLevel - desiredVolume) / steps;
     const loop = setInterval(() => {
-      const nextVol = targetAudio.volume - audioDecrease;
-      targetAudio.volume = nextVol > 0.05 ? nextVol : 0.05;
+      const nextVol = targetAudio.volume - audioChange;
+      if (nextVol < 0.01) {
+        nextVol = 0.01;
+      } else if (nextVol > 1) {
+        nextVol = 1;
+      }
+      targetAudio.volume = nextVol;
     }, intervalInMs);
     const timeout = setTimeout(() => {
       clearInterval(loop);
       clearTimeout(timeout);
-      stop();
-      targetAudio.volume = audioLevel;
-    }, ms + intervalInMs)
+      if (finishHandler) {
+        finishHandler();
+      }
+    }, duration + intervalInMs)
   }
-
 }
