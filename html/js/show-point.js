@@ -69,6 +69,7 @@ function createAudioLinkNode(root) {
   }
 
   function fadeOut(ms) {
+    const audioLevel = targetAudio.volume;
     volumeTransition(ms, 0, () => {
       stop();
       targetAudio.volume = audioLevel;
@@ -81,7 +82,7 @@ function createAudioLinkNode(root) {
     const audioLevel = targetAudio.volume;
     const audioChange = (audioLevel - desiredVolume) / steps;
     const loop = setInterval(() => {
-      const nextVol = targetAudio.volume - audioChange;
+      let nextVol = targetAudio.volume - audioChange;
       if (nextVol < 0.01) {
         nextVol = 0.01;
       } else if (nextVol > 1) {
