@@ -31,7 +31,8 @@
         </actions>
       </show-point>
       <show-point>
-        <trigger class="text">Nehmen wir an hier steht ein längerer Text, ..., aber nicht so lange, dass es nicht doch weitergeht.</trigger>
+        <trigger class="text">Nehmen wir an hier steht ein längerer Text, ..., aber nicht so lange, dass es nicht doch
+          weitergeht.</trigger>
         <actions>
           <light>Umbau</light>
           <audio-link for="preshow" action="fade-out-slow"></audio-link>
@@ -55,45 +56,53 @@
     </div>
     <!-- ******************* PLAY ENDED -->
     <div id="dashboard">
-        <!-- ******************* PRE/POST SHOW START -->
-        <div id="pre-post-show">
-          <sound-effect src="media/preshow jazz.mp3" id="preshow" type="audio/mp3" label="Pre-/Post-Show" vol="0.8" timeline loop>
+      <!-- ******************* PRE/POST SHOW START -->
+      <div id="pre-post-show">
+        <sound-effect src="media/preshow jazz.mp3" id="preshow" type="audio/mp3" label="Pre-/Post-Show" vol="0.8"
+          timeline loop>
+        </sound-effect>
+      </div>
+      <!-- ******************* PRE/POST SHOW END -->
+      <!-- ******************* SHOW START -->
+      <div id="show">
+        <!-- ******************* SOUND EFFECTS START -->
+        <div id="show-sfx">
+          <sound-effect src="media/Doorbell.mp3" type="audio/mp3" label="Türklingel" id="doorbell" vol="0.8" reset>
           </sound-effect>
+          <sound-effect src="media/notification.mp3" type="audio/mp3" label="Notification" id="sms" vol="0.8" reset>
+          </sound-effect>
+          <sound-effect src="media/Skype -  Ringtone.mp3" loop label="Skype Anruf" id="skypeIn" vol="0.8"
+            type="audio/mp3"></sound-effect>
+          <sound-effect src="media/Skype - End Call.mp3" type="audio/mp3" label="Skype Auflegen" id="skypeOut" vol="0.8"
+            reset></sound-effect>
         </div>
-        <!-- ******************* PRE/POST SHOW END -->
-        <!-- ******************* SHOW START -->
-        <div id="show">
-          <!-- ******************* SOUND EFFECTS START -->
-          <div id="show-sfx">
-            <sound-effect src="media/Doorbell.mp3" type="audio/mp3" label="Türklingel" id="doorbell" vol="0.8" reset>
-            </sound-effect>
-            <sound-effect src="media/notification.mp3" type="audio/mp3" label="Notification" id="sms" vol="0.8" reset>
-            </sound-effect>
-            <sound-effect src="media/Skype -  Ringtone.mp3" loop label="Skype Anruf" id="skypeIn" vol="0.8"
-              type="audio/mp3"></sound-effect>
-            <sound-effect src="media/Skype - End Call.mp3" type="audio/mp3" label="Skype Auflegen" id="skypeOut" vol="0.8"
-              reset></sound-effect>
-          </div>
-          <!-- ******************* SOUND EFFECTS END -->
+        <!-- ******************* SOUND EFFECTS END -->
 
-          <!-- ******************* MUSIC START -->
-          <div id="show-music">
-            <sound-effect src="media/zaz - je veux.mp3" label="Zaz - Je Veux" id="zaz" vol="0.8" timeline
-              type="audio/mp3"></sound-effect>
-            <sound-effect src="media/manhattan lounge band - all of me.mp3" label="Manhattan LB  <br> All Of Me" id="jazz"
-              vol="0.8" timeline type="audio/mp3"></sound-effect>
-            <sound-effect src="media/Maske 01 - I'll See You In My Dreams.mp3" label="Maske 01" id="mask01" vol="0.8"
-              timeline type="audio/mp3"></sound-effect>
-            <sound-effect src="media/autumn atmo.mp3" label="Herbst Atmo" id="autumn" vol="0.8" timeline loop
-              type="audio/mp3"></sound-effect>
-            <sound-effect src="media/Soft positive guitar then piano - Demi-Lune.mp3" label="Ausgeh-Fein" id="wheelchair"
-              vol="0.8" timeline type="audio/mp3"></sound-effect>
-          </div>
-          <!-- ******************* MUSIC ENDED -->
+        <!-- ******************* MUSIC START -->
+        <div id="show-music">
+          <sound-effect src="media/zaz - je veux.mp3" label="Zaz - Je Veux" id="zaz" vol="0.8" timeline
+            type="audio/mp3"></sound-effect>
+          <sound-effect src="media/manhattan lounge band - all of me.mp3" label="Manhattan LB  <br> All Of Me" id="jazz"
+            vol="0.8" timeline type="audio/mp3"></sound-effect>
+          <sound-effect src="media/Maske 01 - I'll See You In My Dreams.mp3" label="Maske 01" id="mask01" vol="0.8"
+            timeline type="audio/mp3"></sound-effect>
+          <sound-effect src="media/autumn atmo.mp3" label="Herbst Atmo" id="autumn" vol="0.8" timeline loop
+            type="audio/mp3"></sound-effect>
+          <sound-effect src="media/Soft positive guitar then piano - Demi-Lune.mp3" label="Ausgeh-Fein" id="wheelchair"
+            vol="0.8" timeline type="audio/mp3"></sound-effect>
         </div>
-        <!-- ******************* SHOW ENDED -->
+        <!-- ******************* MUSIC ENDED -->
+        <!-- ******************* TRANSITIONS START -->
+        <div id="trans-music">
+          <sound-effect src="media/Skype -  Ringtone.mp3" label="z. Scene 2"
+            id="trans-s2" vol="0.8" timeline type="audio/mp3"></sound-effect>
+        </div>
+        <!-- ******************* TRANSITIONS ENDED -->
+      </div>
+      <!-- ******************* SHOW ENDED -->
     </div>
     <!-- ******************* DASHBOARD ENDED -->
   </div>
 </body>
+
 </html>

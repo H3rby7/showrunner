@@ -2,7 +2,7 @@
   position: relative;
   background-color: #171717;
   z-index: 100;
-  width: 66vw;
+  min-width: 33vw;
   height: 100vh;
   flex-grow: 1;
   overflow-y: scroll;
@@ -19,6 +19,10 @@
   padding: 0 2rem;
 }
 
-#show-sfx {
+#show > * {
+  width: 100%;
+}
+
+#show-sfx, #show-music {
   margin-bottom: 2rem;
 }
