@@ -67,16 +67,8 @@ light {
   color: var(--color-text-lights);
 }
 
-light::before {
-  content: '\1F4A1'
-}
-
 wait {
   color: var(--color-text-wait);
-}
-
-wait::before {
-  content: '\1F4A4'
 }
 
 audio-link button {
@@ -87,6 +79,22 @@ audio-link button {
 
 audio-link button:hover, audio-link button:active, audio-link button:focus {
   opacity: 0.5;
+}
+
+light::before,
+wait::before,
+audio-link button::before {
+  display: inline-block;
+  text-align: center;
+  width: 3rem;
+}
+
+light::before {
+  content: '\1F4A1'
+}
+
+wait::before {
+  content: '\1F4A4'
 }
 
 audio-link button::before {

@@ -12,7 +12,7 @@ function createAudioLinkNode(root) {
     return;
   }
   const presetAudioLevel = targetAudio.volume;
-  const label = target.attributes.label.value;
+  const label = target.attributes.label.value.replace("<br>", "");
   const btn = document.createElement("button");
   btn.innerText = label;
   btn.addEventListener("click", getHandler(action));
