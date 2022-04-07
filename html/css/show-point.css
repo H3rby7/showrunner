@@ -27,6 +27,12 @@ show-point {
   margin-bottom: 1rem;
 }
 
+show-point.section {
+  background-color: var(--color-primary);
+  font-size: 3rem;
+  color: #fff;
+}
+
 trigger {
   font-size: 200%;
   display: block;

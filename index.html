@@ -23,6 +23,7 @@
   </audio>
   <div class="content">
     <div id="the-play">
+      <show-point class="section">PRESHOW</show-point>
       <show-point>
         <trigger class="event">PRESHOW</trigger>
         <actions>
@@ -50,7 +51,8 @@
         <trigger class="text">Okay voll schön!</trigger>
         <actions>
           <audio-link for="zaz" action="reset"></audio-link>
-          <audio-link for="doorbell" action="play-from-start"></audio-link>
+          <audio-link for="doorbell" action="play-from-start"> - multiple?</audio-link>
+          <audio-link for="zaz" action="fade-out-fast">(Security Stop)</audio-link>
         </actions>
       </show-point>
     </div>

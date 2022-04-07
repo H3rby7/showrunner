@@ -15,8 +15,14 @@ function createAudioLinkNode(root) {
   const label = target.attributes.label.value;
   const btn = document.createElement("button");
   btn.innerText = label;
-  root.addEventListener("click", getHandler(action));
-  root.appendChild(btn);
+  btn.addEventListener("click", getHandler(action));
+  if (root.hasChildNodes()) {
+    const firstBorn = root.removeChild(root.childNodes[0]);
+    root.appendChild(btn);
+    root.appendChild(firstBorn);
+  } else {
+    root.appendChild(btn);
+  }
 
   function getHandler(actionString) {
     if (actionString === "start") {
