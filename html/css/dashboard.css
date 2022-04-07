@@ -1,28 +1,27 @@
 #dashboard {
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
   background-color: #171717;
   z-index: 100;
-  min-width: 33vw;
+  width: 33vw;
   height: 100vh;
   flex-grow: 1;
   overflow-y: scroll;
 }
 
 #pre-post-show {
-  padding: 2rem;
+  padding: 2rem 1rem;
 }
 
 #show {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 #show > * {
   width: 100%;
-}
-
-#show-sfx, #show-music {
   margin-bottom: 2rem;
 }

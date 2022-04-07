@@ -1,0 +1,19 @@
+@media print {
+  :root {
+    font-size: 33%;
+  }
+  #dashboard {
+    position: absolute;
+    height: auto;
+    width: 50vw;
+    display: none;
+  }
+  #the-play {
+    width: 100%;
+  }
+  show-point {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+}
