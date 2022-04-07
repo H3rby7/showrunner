@@ -11,7 +11,7 @@ function createAudioLinkNode(root) {
     console.error(`Audio-Link: targetAudio '${forId}' is not part of this page.`);
     return;
   }
-  let presetAudioLevel = targetAudio.volume;
+  const presetAudioLevel = targetAudio.volume;
   const label = target.attributes.label.value;
   const btn = document.createElement("button");
   btn.innerText = label;
@@ -60,7 +60,6 @@ function createAudioLinkNode(root) {
   }
 
   function lower() {
-    presetAudioLevel = targetAudio.volume;
     volumeTransition(1000, targetAudio.volume / 5);
   }
 

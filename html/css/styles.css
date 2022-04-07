@@ -22,16 +22,10 @@ body {
   background-color: #171717;
 }
 
-#pre-post-show {
-  padding: 2rem;
-}
-#show {
+.content {
   display: flex;
-  width: 100%;
-}
-#show-music, #show-sfx {
-  width: 30rem;
-  padding: 2rem;
+  flex-direction: row;
+  width: 100vw;
 }
 
 button {

@@ -1,51 +1,24 @@
 #dashboard {
-  position: fixed;
-  top: 0;
-  width: 100vw;
+  position: relative;
   background-color: #171717;
   z-index: 100;
-}
-
-#dashboard .db-content {
-  width: 100%;
-  max-height: 80vh;
-  transition: 300ms;
+  width: 66vw;
+  height: 100vh;
+  flex-grow: 1;
   overflow-y: scroll;
 }
 
-#dashboard.collapsed .db-content {
-  max-height: 20px;
-  overflow: hidden;
+#pre-post-show {
+  padding: 2rem;
 }
 
-.dashboard-ctrl {
+#show {
+  display: flex;
   width: 100%;
-  position: absolute;
-  bottom: 0;
-  text-align: center;
-  background-color: #171717;
-  border-bottom: 1px solid var(--audio-timeline-bg-color);
+  flex-wrap: wrap;
+  padding: 0 2rem;
 }
 
-#dashboard.collapsed .dashboard-ctrl {
-  height: 20px;
-}
-
-#toggle-dash {
-  position: absolute;
-  background-color: transparent;
-  color: var(--color-primary);
-  font-weight: 700;
-  top: 0;
-  font-size: 3rem;
-}
-
-#toggle-dash:hover, #toggle-dash:active {
-  cursor: pointer;
-  color: var(--color-text);
-}
-
-#dashboard.collapsed #toggle-dash {
-  transform: rotateX(180deg);
-  transform-origin: center;
+#show-sfx {
+  margin-bottom: 2rem;
 }

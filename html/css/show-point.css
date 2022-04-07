@@ -7,7 +7,7 @@
 #the-play {
   position: relative;
   padding: 2rem;
-  width: 100vw;
+  min-width: 33vw;
   height: 100vh;
   overflow-y: scroll;
   color: var(--color-text);
@@ -52,8 +52,8 @@ actions {
 }
 
 actions > * {
-  margin-right: 1rem;
-  display: inline-block;
+  margin-bottom: 1rem;
+  display: block;
   text-align: left;
 }
 
