@@ -43,6 +43,12 @@ function createAudioLinkNode(root) {
     if (actionString === "fade-out-slow") {
       return () => {fadeOut(10000)};
     }
+    if (actionString === "start-low") {
+      return ()=> {
+        targetAudio.volume = targetAudio.volume / 8;
+        start();
+      }
+    }
     if (actionString === "lower") {
       return lower;
     }
@@ -70,7 +76,7 @@ function createAudioLinkNode(root) {
   }
 
   function reset() {
-    volumeTransition(1000, presetAudioLevel);
+    volumeTransition(2500, presetAudioLevel);
   }
 
   function fadeOut(ms) {
