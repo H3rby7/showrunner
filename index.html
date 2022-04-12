@@ -59,9 +59,15 @@
       <show-point>
         <trigger class="event">Nach Umbau</trigger>
         <actions>
-          <audio-link for="zaz" action="start-low">(starts low VOL)</audio-link>
+          <audio-link for="zaz" action="start-low">(start with low VOL)</audio-link>
           <audio-link for="zaz" action="reset"></audio-link>
           <audio-link for="zaz" action="fade-out-fast">(Security Stop)</audio-link>
+        </actions>
+      </show-point>
+      <show-point>
+        <trigger class="event">Schweigen</trigger>
+        <actions>
+          <audio-link for="zaz" action="fade-in-medium">(starts low, slowly to normal VOL)</audio-link>
         </actions>
       </show-point>
     </div>

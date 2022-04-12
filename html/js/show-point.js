@@ -49,6 +49,13 @@ function createAudioLinkNode(root) {
         start();
       }
     }
+    if (actionString === "fade-in-medium") {
+      return ()=> {
+        targetAudio.volume = targetAudio.volume / 5;
+        start();
+        reset();
+      }
+    }
     if (actionString === "lower") {
       return lower;
     }
