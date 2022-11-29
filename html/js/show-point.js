@@ -45,7 +45,7 @@ function createAudioLinkNode(root) {
     }
     if (actionString === "start-low") {
       return ()=> {
-        targetAudio.volume = targetAudio.volume / 8;
+        targetAudio.volume = targetAudio.volume / 3;
         start();
       }
     }
