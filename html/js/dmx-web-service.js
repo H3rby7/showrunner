@@ -21,6 +21,9 @@ function findDimmers() {
 }
 
 function fadeMultipleDMX(dmxList, fadeTimeMillis = 1) {
+  if (typeof fadeTimeMillis == "string") {
+    fadeTimeMillis = parseInt(fadeTimeMillis);
+  }
   const url = `${backendBaseUrl}/dmx/fade`;
   fetch(url, {
     headers: {
