@@ -9,6 +9,7 @@
   <script src="html/js/loop-audio.js"></script>
   <script src="html/js/dashboard.js"></script>
   <script src="html/js/show-point.js"></script>
+  <script src="html/js/dmx-web-service.js"></script>
   <link href="html/css/styles.css" rel="stylesheet">
   <link href="html/css/dashboard.css" rel="stylesheet">
   <link href="html/css/audio.css" rel="stylesheet">
@@ -17,6 +18,34 @@
 </head>
 
 <body>
+  <script>
+    const scenes = {
+      preshow: {
+        faded: [
+          {channel: 4, value: 50},
+        ],
+        instant: [
+          {channel: 1, value: 200},
+          {channel: 2, value: 150},
+          {channel: 3, value: 0},
+        ]
+      },
+      livingRoom: {
+        faded: [
+          {channel: 12, value: 120},
+          {channel: 13, value: 120},
+          {channel: 14, value: 70},
+        ],
+        instant: []
+      },
+      alteration: {
+        faded: [
+          {channel: 12, value: 30},
+        ],
+        instant: []
+      },
+    };
+  </script>
   <!-- Somehow the autoplay, muted, loop helps the browser Audio to stay 'active', so freshly run sounds are hearable from the start on -->
   <audio preload="auto" loop muted autoplay>
     <source src="media/notification.mp3" type="audio/mp3">
@@ -28,7 +57,7 @@
       <show-point>
         <trigger class="event">PRESHOW</trigger>
         <actions>
-          <light>Pause</light>
+          <light scene="preshow" fade="5000">Pause</light>
           <audio-link for="preshow"></audio-link>
         </actions>
       </show-point>
@@ -36,7 +65,7 @@
         <trigger class="text">Nehmen wir an hier steht ein längerer Text, ..., aber nicht so lange, dass es nicht doch
           weitergeht.</trigger>
         <actions>
-          <light>Umbau</light>
+          <light scene="alteration" fade="1500">Umbau</light>
           <audio-link for="preshow" action="fade-out-slow"></audio-link>
           <wait>1s</wait>
           <audio-link for="zaz" action="start"></audio-link>

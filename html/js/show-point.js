@@ -117,3 +117,32 @@ function createAudioLinkNode(root) {
     }, duration + intervalInMs)
   }
 }
+
+function createLightNode(root) {
+  const forScene = root.attributes.scene.value;
+  const fadeTime = root.attributes.fade ? root.attributes.fade.value : 1;
+  const targetScene = scenes[forScene];
+  if (!targetScene) {
+    console.error(`Light: Scene with name '${forScene}' is not defined.`);
+    return;
+  }
+  const btn = document.createElement("button");
+  btn.innerText = root.innerText;
+  root.innerText = "";
+  btn.addEventListener("click", getHandler(targetScene, fadeTime));
+  if (root.hasChildNodes()) {
+    const firstBorn = root.removeChild(root.childNodes[0]);
+    root.appendChild(btn);
+    root.appendChild(firstBorn);
+  } else {
+    root.appendChild(btn);
+  }
+
+  function getHandler(targetScene, fadeTime) {
+    return () => {
+      console.log(`Light: Fading to ${forScene} over ${fadeTime} millis.`);
+      switchToScene(targetScene, fadeTime);
+    };
+  }
+
+}

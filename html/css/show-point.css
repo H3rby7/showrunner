@@ -69,25 +69,27 @@ wait {
   color: var(--color-text-wait);
 }
 
-audio-link button {
+audio-link button,
+light button {
   font-size: inherit;
   color: var(--color-text-audio);
   background-color: transparent;
 }
 
-audio-link button:hover, audio-link button:active, audio-link button:focus {
+audio-link button:hover, audio-link button:active, audio-link button:focus,
+light button:hover, light button:active, light button:focus {
   opacity: 0.5;
 }
 
-light::before,
 wait::before,
+light button::before,
 audio-link button::before {
   display: inline-block;
   text-align: center;
   width: 3rem;
 }
 
-light::before {
+light button::before {
   content: '\1F4A1'
 }
 
