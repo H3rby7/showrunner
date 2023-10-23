@@ -4,7 +4,7 @@
   --color-primary: #893fe3;
   --color-primary-active: #3183ec;
   --color-text: #dddddd;
-  --audio-timeline-bg-color: #4a4a4a;
+  --audio-timeline-bg-color: #777777;
   --audio-timeline-bg-played-color: rgba(140, 140, 140, 0.5);
   --audio-timeline-thumb-color: #ffffff;
   --audio-volume-bg-color: #4a4a4a;
@@ -19,7 +19,8 @@ body {
   margin: 0;
   width: 100%;
   position: relative;
-  background-color: #171717;
+  /*background-color: #171717;*/
+  background-color: #aaaaaa;
 }
 
 .content {

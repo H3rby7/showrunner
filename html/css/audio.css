@@ -22,7 +22,8 @@ audio.custom-audio {
 .audio-label {
   width: 10rem;
   height: var(--audio-controls-height);
-  color: var(--color-text);
+  /* color: var(--color-text); */
+  color: #333;
   font-size: 1.5rem;
   line-height: 1.5rem;
   display: flex;

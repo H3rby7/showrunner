@@ -6,5 +6,6 @@
 *.doc
 *.docx
 *.ods
+*.ods#
 *.au
 my-show.html
