@@ -22,7 +22,7 @@ function dimScene(input, factor = 1) {
     }
     return {
       channel: cv.channel, 
-      value: cv.value * factor,
+      value: nextVal,
     };
   });
   return next;
