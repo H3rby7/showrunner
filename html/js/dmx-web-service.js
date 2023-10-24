@@ -25,11 +25,13 @@ function fadeMultipleDMX(dmxList, fadeTimeMillis = 1) {
     fadeTimeMillis = parseInt(fadeTimeMillis);
   }
   const url = `${backendBaseUrl}/dmx/fade`;
+  const body = JSON.stringify({ fadeTimeMillis: fadeTimeMillis, scene: {list: dmxList }}, ' ', 2);
+  console.log(body);
   fetch(url, {
     headers: {
       "content-type": "application/json"
     },
-    body: JSON.stringify({ fadeTimeMillis: fadeTimeMillis, scene: {list: dmxList }}),
+    body: body,
     method: "PATCH"
   })
   .then(() => console.log("SUCCESS!"))
