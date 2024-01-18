@@ -121,15 +121,19 @@ function createAudioLinkNode(root) {
 function createLightNode(root) {
   const forScene = root.attributes.scene.value;
   const fadeTime = root.attributes.fade ? root.attributes.fade.value : 1;
-  const targetScene = scenes[forScene];
-  if (!targetScene) {
-    console.error(`Light: Scene with name '${forScene}' is not defined.`);
-    return;
-  }
   const btn = document.createElement("button");
   btn.innerText = root.innerText;
   root.innerText = "";
-  btn.addEventListener("click", getHandler(targetScene, fadeTime));
+  if (lights) {
+    const targetScene = scenes[forScene];
+    if (!targetScene) {
+      console.error(`Light: Scene with name '${forScene}' is not defined.`);
+      return;
+    }
+    btn.addEventListener("click", getHandler(targetScene, fadeTime));
+  } else {
+    btn.tabIndex = -1;
+  }
   if (root.hasChildNodes()) {
     const firstBorn = root.removeChild(root.childNodes[0]);
     root.appendChild(btn);

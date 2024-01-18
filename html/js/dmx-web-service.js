@@ -3,6 +3,10 @@ const backendBaseUrl = `http://${server}/api/v1`
 
 let dimmerChannels = [];
 function findDimmers() {
+  if (!lights) {
+    console.warn(`Lightcontrol via HTML is disabled.`);
+    return;
+  }
   if (!scenes) {
     console.error(`DMX Service: The global variable 'scenes' is not defined.`);
     return;
