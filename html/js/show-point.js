@@ -150,3 +150,20 @@ function createLightNode(root) {
   }
 
 }
+
+
+function createMicNode(root) {
+  const div = document.createElement("div");
+  div.innerText = root.innerText;
+  root.innerText = "";
+  if (!muting) {
+    div.style = "display: none;";
+  }
+  if (root.hasChildNodes()) {
+    const firstBorn = root.removeChild(root.childNodes[0]);
+    root.appendChild(div);
+    root.appendChild(firstBorn);
+  } else {
+    root.appendChild(div);
+  }
+}

@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // AFTER audios have been created...
   document.querySelectorAll("audio-link")
     .forEach(createAudioLinkNode);
+  document.querySelectorAll("mic")
+    .forEach(createMicNode);
   document.querySelectorAll("light")
     .forEach(createLightNode);
   findDimmers();
