@@ -81,6 +81,11 @@ light button:hover, light button:active, light button:focus {
   opacity: 0.5;
 }
 
+.no-light-control light button:hover, .no-light-control light button:active, .no-light-control light button:focus {
+  opacity: 1.0;
+  pointer-events: none;
+}
+
 wait::before,
 light button::before,
 audio-link button::before {

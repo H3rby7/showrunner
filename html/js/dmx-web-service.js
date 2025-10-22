@@ -5,6 +5,7 @@ let dimmerChannels = [];
 function findDimmers() {
   if (!lights) {
     console.warn(`Lightcontrol via HTML is disabled.`);
+    document.getElementById('the-play').classList.add('no-light-control');
     return;
   }
   if (!scenes) {
